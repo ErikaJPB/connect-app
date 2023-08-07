@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { OrganizationSwitcher, SignOutButton, SignedIn } from "@clerk/nextjs";
+import {
+  OrganizationSwitcher,
+  SignOutButton,
+  SignedIn,
+  UserButton,
+  UserProfile,
+} from "@clerk/nextjs";
 import { TbLogout } from "react-icons/tb";
 import { dark } from "@clerk/themes";
 
@@ -23,14 +29,7 @@ function Topbar() {
           </SignedIn>
         </div>
 
-        <OrganizationSwitcher
-          appearance={{
-            baseTheme: dark,
-            elements: {
-              organizationSwitcherTrigger: "py-4 px-6",
-            },
-          }}
-        />
+        <UserButton />
       </div>
     </nav>
   );
