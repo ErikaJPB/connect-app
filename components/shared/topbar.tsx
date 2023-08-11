@@ -29,7 +29,7 @@ function Topbar() {
           <SignedIn>
             <SignOutButton>
               <div className="flex cursor-pointer">
-                <TbLogout className="text-white" size={30} />
+                <TbLogout className="text-black" size={30} />
               </div>
             </SignOutButton>
           </SignedIn>

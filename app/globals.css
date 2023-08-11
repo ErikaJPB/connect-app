@@ -43,10 +43,14 @@ body {
   .bottom-bar-link {
     @apply relative flex flex-col items-center gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-2.5;
   }
-}
 
-.font-heading1-bold {
-  @apply text-heading1-bold;
+  .head-text {
+    @apply text-heading2-bold  text-black;
+  }
+
+  .font-heading1-bold {
+    @apply text-heading1-bold;
+  }
 }
 
 @layer utilities {
@@ -72,4 +76,18 @@ body {
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #7878a3;
   }
+}
+
+/* Shadcn Styles */
+
+.account-form-image-label {
+  @apply flex h-24 w-24 items-center justify-center rounded-full text-black !important;
+}
+
+.account-form-image-input {
+  @apply cursor-pointer border-none bg-transparent  outline-none file:text-violet-400 !important;
+}
+
+.account-form-input {
+  @apply bg-gray-200 text-black !important;
 }
