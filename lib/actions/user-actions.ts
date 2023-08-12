@@ -29,7 +29,14 @@ export async function updateUser({
       {
         id: userId,
       },
-      { username: username.toLowerCase(), name, bio, image, path },
+      {
+        username: username.toLowerCase(),
+        name,
+        bio,
+        image,
+        onboarded: true,
+        path,
+      },
       { upsert: true }
     );
 
@@ -45,13 +52,7 @@ export async function fetchUser(userId: string) {
   try {
     connectToDB();
 
-    return await User.findOne({ id: userId }).populate({
-      path: "posts",
-      populate: {
-        path: "author",
-        model: "User",
-      },
-    });
+    return await User.findOne({ id: userId });
   } catch (error: any) {
     throw new Error(`Error fetching user: ${error.message}`);
   }

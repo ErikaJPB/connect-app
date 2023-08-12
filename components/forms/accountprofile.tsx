@@ -51,6 +51,33 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user, btnTittle }) => {
     },
   });
 
+  async function onSubmit(values: z.infer<typeof UserValidation>) {
+    const blob = values.profile_photo;
+    const hasImageChanged = isBase64Image(blob);
+    if (hasImageChanged) {
+      const imgRes = await startUpload(files);
+
+      if (imgRes && imgRes[0].url) {
+        values.profile_photo = imgRes[0].url;
+      }
+    }
+
+    await updateUser({
+      userId: user.id,
+      username: values.username,
+      name: values.name,
+      bio: values.bio,
+      image: values.profile_photo,
+      path: pathname,
+    });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
+  }
+
   function handleImage(
     event: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: string) => void
@@ -70,33 +97,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user, btnTittle }) => {
       };
 
       fileReader.readAsDataURL(file);
-    }
-  }
-
-  async function onSubmit(values: z.infer<typeof UserValidation>) {
-    const blob = values.profile_photo;
-    const hasImageChanged = isBase64Image(blob);
-    if (hasImageChanged) {
-      const imgRes = await startUpload(files);
-
-      if (imgRes && imgRes[0].fileUrl) {
-        values.profile_photo = imgRes[0].fileUrl;
-      }
-    }
-
-    await updateUser({
-      userId: user.id,
-      username: values.username,
-      name: values.name,
-      bio: values.bio,
-      image: values.profile_photo,
-      path: pathname,
-    });
-
-    if (pathname === "/profile/edit") {
-      router.back();
-    } else {
-      router.push("/");
     }
   }
 
@@ -180,6 +180,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user, btnTittle }) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
