@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 
 import { fetchUser } from "@/lib/actions/user-actions";
 import CreatePost from "@/components/forms/createpost";
-import { TbLayoutDistributeVertical } from "react-icons/tb";
 
 async function Page() {
   const user = await currentUser();

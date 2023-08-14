@@ -25,8 +25,8 @@ export const sidebarLinks = [
   },
   {
     icon: IoCreateSharp,
-    route: "/post",
-    label: "Post",
+    route: "/create-post",
+    label: "Create Post",
   },
   {
     icon: AiFillHeart,

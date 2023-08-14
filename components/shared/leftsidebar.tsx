@@ -31,12 +31,12 @@ function LeftSidebar() {
             <Link
               href={link.route}
               key={link.label}
-              className={`flex relative justify-start gap-4 rounded-lg p-4 ${
+              className={`flex relative justify-start gap-3  rounded-lg p-4 ${
                 isActive && "bg-secondary"
               } `}
             >
-              {link.icon({ size: 30, className: "text-black" })}
-              <p className="text-black max-lg:hidden">{link.label}</p>
+              {link.icon({ size: 28, className: "text-black" })}
+              <p className="text-black p-1.5 max-lg:hidden">{link.label}</p>
             </Link>
           );
         })}

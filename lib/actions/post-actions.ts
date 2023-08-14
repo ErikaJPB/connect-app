@@ -31,7 +31,7 @@ export async function createPost({ text, author, path }: Params) {
   }
 }
 
-export async function fetchPost(pageNumber = 1, pageSize = 20) {
+export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   connectToDB();
 
   const skipAmount = (pageNumber - 1) * pageSize;
@@ -59,4 +59,41 @@ export async function fetchPost(pageNumber = 1, pageSize = 20) {
   const isNext = totalPostsCount > skipAmount + posts.length;
 
   return { posts, isNext };
+}
+
+export async function fetchPostById(id: string) {
+  connectToDB();
+
+  try {
+    const post = await Post.findById(id)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id name image",
+      })
+      .populate({
+        path: "children",
+        populate: [
+          {
+            path: "author",
+            model: User,
+            select: "_id name parentId image",
+          },
+          {
+            path: "children",
+            model: Post,
+            populate: {
+              path: "author",
+              model: User,
+              select: "_id id name parentId image",
+            },
+          },
+        ],
+      })
+      .exec();
+
+    return post;
+  } catch (error: any) {
+    throw new Error(`Error fetching post: ${error.message}`);
+  }
 }

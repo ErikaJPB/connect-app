@@ -10,8 +10,8 @@ import { TbLogout } from "react-icons/tb";
 
 function Topbar() {
   return (
-    <nav className="fixed top-0 z-30 flex w-full items-center justify-between px-6 py-3">
-      <Link href="/" className="flex items-center gap-4 mx-6 mb-2 ">
+    <nav className="fixed top-0 z-30 flex w-full items-center justify-between px-3 py-3">
+      <Link href="/" className="flex items-center gap-4 ">
         <Image
           src="/logo.svg"
           width={80}
@@ -19,9 +19,7 @@ function Topbar() {
           className="py-4 mr-4 ml-2 mx-4"
           alt="image"
         />
-        <p className="font-heading1-bold text-black max-xs:hidden px-4 mx-4">
-          Connect
-        </p>
+        <p className="font-heading1-bold text-black max-xs:hidden">Connect</p>
       </Link>
 
       <div className="flex items-center gap-1">

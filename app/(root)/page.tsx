@@ -1,17 +1,17 @@
 import { currentUser } from "@clerk/nextjs";
 import PostCard from "@/components/cards/postcard";
-import { fetchPost } from "@/lib/actions/post-actions";
+import { fetchPosts } from "@/lib/actions/post-actions";
 
 const Home = async () => {
   const user = await currentUser();
   if (!user) return null;
 
-  const result = await fetchPost(1, 30);
+  const result = await fetchPosts(1, 30);
 
   return (
     <>
-      <h1 className="head-text left-home">Home</h1>
-      <section className="flex flex-col mt-9 gap-8">
+      <h1 className="head-text text-left">Home</h1>
+      <section className="flex flex-col mt-9 gap-10 ">
         {result.posts.length === 0 ? (
           <p className="text-center">No posts found</p>
         ) : (
