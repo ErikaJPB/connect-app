@@ -97,3 +97,32 @@ export async function fetchPostById(id: string) {
     throw new Error(`Error fetching post: ${error.message}`);
   }
 }
+
+export async function addCommentToPost(
+  postId: string,
+  commentText: string,
+  userId: string,
+  path: string
+) {
+  connectToDB();
+  try {
+    const originalPost = await Post.findById(postId);
+    if (!originalPost) {
+      throw new Error("Post not found");
+    }
+    const commentPost = new Post({
+      text: commentText,
+      author: userId,
+      parentId: postId,
+    });
+    const savedCommentPost = await commentPost.save();
+
+    originalPost.children.push(savedCommentPost._id);
+
+    await originalPost.save();
+
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`Error adding comment to post: ${error.message}`);
+  }
+}

@@ -95,5 +95,5 @@ body {
 }
 
 .account-form-input {
-  @apply bg-gray-200 text-black !important;
+  @apply bg-secondary text-gray-800 !important;
 }
