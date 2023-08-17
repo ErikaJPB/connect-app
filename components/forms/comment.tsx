@@ -55,8 +55,8 @@ function Comment({ postId, currentUserImg, currentUserId }: Props) {
           control={form.control}
           name="post"
           render={({ field }) => (
-            <FormItem className="flex w-full gap-3 ">
-              <FormLabel className="text-base-semibold">
+            <FormItem className="flex w-full items-center gap-3 ">
+              <FormLabel>
                 <Image
                   src={currentUserImg}
                   alt="User Image"

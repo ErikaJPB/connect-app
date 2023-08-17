@@ -111,7 +111,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user, btnTittle }) => {
           name="profile_photo"
           render={({ field }) => (
             <FormItem className="flex items-center gap-4">
-              <FormLabel className=" account-form-image-input flex h-24 w-24 items-center justify-center rounded-full">
+              <FormLabel className="flex h-24 w-24 items-center justify-center ">
                 {field.value ? (
                   <Image
                     src={field.value}
