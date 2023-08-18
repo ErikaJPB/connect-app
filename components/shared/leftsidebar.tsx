@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { sidebarLinks } from "@/constants/index.js";
 import Link from "next/link";
 import {
   AiFillHome,
@@ -12,10 +11,12 @@ import {
 import { TbActivityHeartbeat, TbLogout } from "react-icons/tb";
 import { IoCreateSharp } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
-import path from "path";
-import { SignOutButton, SignedIn } from "@clerk/nextjs";
+import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
+
+import { sidebarLinks } from "@/constants/index.js";
 
 function LeftSidebar() {
+  const { userId } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -24,9 +25,10 @@ function LeftSidebar() {
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {sidebarLinks.map((link) => {
           const isActive =
-            pathname === link.route ||
-            pathname === path.join(link.route, "index");
+            (pathname.includes(link.route) && link.route.length > 1) ||
+            pathname === link.route;
 
+          if (link.route === "/profile") link.route = `${link.route}/${userId}`;
           return (
             <Link
               href={link.route}

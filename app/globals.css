@@ -97,3 +97,7 @@ body {
 .account-form-input {
   @apply bg-secondary text-gray-800 !important;
 }
+
+.tab {
+  @apply flex min-h-[50px] flex-1 items-center gap-3 bg-black text-white data-[state=active]:bg-[#0e0e12] data-[state=active]:text-secondary !important;
+}

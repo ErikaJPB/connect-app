@@ -57,13 +57,14 @@ function Comment({ postId, currentUserImg, currentUserId }: Props) {
           render={({ field }) => (
             <FormItem className="flex w-full items-center gap-3 ">
               <FormLabel>
-                <Image
-                  src={currentUserImg}
-                  alt="User Image"
-                  width={50}
-                  height={50}
-                  className="rounded-full object-cover"
-                />
+                <div className="relative h-14 w-14 object-cover">
+                  <Image
+                    src={currentUserImg}
+                    alt="User Image"
+                    fill
+                    className="rounded-full object-cover shadow-xl"
+                  />
+                </div>
               </FormLabel>
               <FormControl className="border-none bg-transparent">
                 <Input

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/usermodel";
+import Post from "../models/postmodel";
 
 interface Params {
   userId: string;
@@ -55,5 +56,29 @@ export async function fetchUser(userId: string) {
     return await User.findOne({ id: userId });
   } catch (error: any) {
     throw new Error(`Error fetching user: ${error.message}`);
+  }
+}
+
+export async function fetchUserPosts(userId: string) {
+  try {
+    connectToDB();
+
+    const posts = await User.findOne({ id: userId }).populate({
+      path: "posts",
+      model: "Post",
+      populate: {
+        path: "children",
+        model: Post,
+        populate: {
+          path: "author",
+          model: User,
+          select: "name image id",
+        },
+      },
+    });
+
+    return posts;
+  } catch (error: any) {
+    throw new Error(`Error fetching user posts: ${error.message}`);
   }
 }

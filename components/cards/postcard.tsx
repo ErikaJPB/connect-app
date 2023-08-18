@@ -65,7 +65,7 @@ const PostCard = ({
 
             <p className="mt-2 text-base-medium text-gray-800">{content}</p>
 
-            <div className="flex flex-col mt-5 gap-3">
+            <div className={`${isComment && "mb-10"} flex flex-col mt-5 gap-3`}>
               <div className="flex gap-3">
                 <AiOutlineHeart
                   size={25}

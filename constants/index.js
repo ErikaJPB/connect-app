@@ -6,6 +6,8 @@ import {
 } from "react-icons/ai";
 import { TbActivityHeartbeat } from "react-icons/tb";
 import { IoCreateSharp } from "react-icons/io5";
+import { BsFillReplyAllFill } from "react-icons/bs";
+import { TfiLayoutListPost } from "react-icons/tfi";
 
 export const sidebarLinks = [
   {
@@ -38,5 +40,23 @@ export const sidebarLinks = [
     icon: AiOutlineUser,
     route: "/profile",
     label: "Profile",
+  },
+];
+
+export const profileTabs = [
+  {
+    icon: TfiLayoutListPost,
+    value: "posts",
+    label: "Posts",
+  },
+  {
+    icon: BsFillReplyAllFill,
+    value: "replies",
+    label: "Replies",
+  },
+  {
+    icon: AiFillHeart,
+    value: "likes",
+    label: "Likes",
   },
 ];
