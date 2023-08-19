@@ -113,22 +113,24 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user, btnTittle }) => {
             <FormItem className="flex items-center gap-4">
               <FormLabel className="flex h-24 w-24 items-center justify-center ">
                 {field.value ? (
-                  <Image
-                    src={field.value}
-                    alt="profile photo"
-                    width={96}
-                    height={96}
-                    priority
-                    className="rounded-full object-contain"
-                  />
+                  <div className="relative h-14 w-14 object-cover">
+                    <Image
+                      src={field.value}
+                      alt="profile photo"
+                      fill
+                      priority
+                      className="rounded-full object-cover shadow-xl"
+                    />
+                  </div>
                 ) : (
-                  <Image
-                    src="/assets/user.svg"
-                    alt="profile photo"
-                    width={50}
-                    height={50}
-                    className="object-contain"
-                  />
+                  <div className="relative h-14 w-14 object-cover">
+                    <Image
+                      src="/assets/user.svg"
+                      alt="profile photo"
+                      fill
+                      className="rounded-full object-cover shadow-xl"
+                    />
+                  </div>
                 )}
               </FormLabel>
               <FormControl className="account-form-input">
