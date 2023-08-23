@@ -132,3 +132,28 @@ export async function fetchUsers({
     throw new Error(`Error fetching users: ${error.message}`);
   }
 }
+
+export async function getActivity(userId: string) {
+  try {
+    connectToDB();
+
+    const userPosts = await Post.find({ author: userId });
+
+    const childPostsIds = userPosts.reduce((acc, post) => {
+      return [...acc, ...post.children];
+    }, []);
+
+    const replies = await Post.find({
+      _id: { $in: childPostsIds },
+      author: { $ne: userId },
+    }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
+    });
+
+    return replies;
+  } catch (error: any) {
+    throw new Error(`Error fetching activity: ${error.message}`);
+  }
+}
