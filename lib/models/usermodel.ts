@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  likedPosts: [
+  likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",

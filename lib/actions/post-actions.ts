@@ -114,6 +114,7 @@ export async function addCommentToPost(
       text: commentText,
       author: userId,
       parentId: postId,
+      likedBy: [],
     });
     const savedCommentPost = await commentPost.save();
 
@@ -124,5 +125,49 @@ export async function addCommentToPost(
     revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Error adding comment to post: ${error.message}`);
+  }
+}
+
+export async function likePost(userId: string, postId: string) {
+  connectToDB();
+  try {
+    const post = await Post.findById(postId);
+    const user = await User.findById(userId);
+
+    if (!post || !user) {
+      throw new Error("Post or user not found");
+    }
+
+    if (!post.likedBy.includes(userId)) {
+      post.likedBy.push(userId);
+      user.likes.push(postId);
+    }
+
+    await post.save();
+    await user.save();
+  } catch (error: any) {
+    throw new Error(`Error liking post: ${error.message}`);
+  }
+}
+
+export async function unlikePost(userId: string, postId: string) {
+  connectToDB();
+  try {
+    const post = await Post.findById(postId);
+    const user = await User.findById(userId);
+
+    if (!post || !user) {
+      throw new Error("Post or user not found");
+    }
+
+    if (post.likedBy.includes(userId)) {
+      post.likedBy = post.likedBy.filter((id: string) => id !== userId);
+      user.likes = user.likes.filter((id: string) => id !== postId);
+    }
+
+    await post.save();
+    await user.save();
+  } catch (error: any) {
+    throw new Error(`Error unliking post: ${error.message}`);
   }
 }

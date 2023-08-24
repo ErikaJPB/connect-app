@@ -32,8 +32,8 @@ export const sidebarLinks = [
   },
   {
     icon: AiFillHeart,
-    route: "/liked",
-    label: "Liked",
+    route: "/likes",
+    label: "Likes",
   },
 
   {

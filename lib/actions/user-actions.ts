@@ -157,3 +157,23 @@ export async function getActivity(userId: string) {
     throw new Error(`Error fetching activity: ${error.message}`);
   }
 }
+
+export async function fetchUserLikes(userid: string) {
+  try {
+    connectToDB();
+
+    const user = await User.findById(userid).populate({
+      path: "likes",
+      model: Post,
+      populate: {
+        path: "author",
+        model: User,
+        select: "name image _id",
+      },
+    });
+
+    return user?.likes || [];
+  } catch (error: any) {
+    throw new Error(`Error fetching user likes: ${error.message}`);
+  }
+}
