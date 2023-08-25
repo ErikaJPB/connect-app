@@ -29,6 +29,14 @@ const postSchema = new mongoose.Schema({
       ref: "Post",
     },
   ],
+  isLiked: {
+    type: Boolean,
+    default: false,
+  },
+  isComment: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
