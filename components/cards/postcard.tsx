@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillReplyAllFill } from "react-icons/bs";
 import { BiRepost } from "react-icons/bi";
+import LikeButton from "../buttons/likebutton";
+import RepostButton from "../buttons/repostbutton";
 
 interface Props {
   id: string;
@@ -21,6 +22,7 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  isLiked?: boolean;
 }
 
 const PostCard = ({
@@ -32,6 +34,7 @@ const PostCard = ({
   createdAt,
   comments,
   isComment,
+  isLiked,
 }: Props) => {
   return (
     <article
@@ -67,9 +70,10 @@ const PostCard = ({
 
             <div className={`${isComment && "mb-10"} flex flex-col mt-5 gap-3`}>
               <div className="flex gap-3">
-                <AiOutlineHeart
-                  size={25}
-                  className="text-black cursor-pointer object-contain"
+                <LikeButton
+                  isLiked={isLiked || false}
+                  userId={currentUserId}
+                  postId={id}
                 />
 
                 <Link href={`/post/${id}`}>
@@ -79,10 +83,7 @@ const PostCard = ({
                   />
                 </Link>
 
-                <BiRepost
-                  size={25}
-                  className="text-black cursor-pointer object-contain"
-                />
+                <RepostButton />
               </div>
               {isComment && comments.length > 0 && (
                 <Link href={`/post/${id}`}>
