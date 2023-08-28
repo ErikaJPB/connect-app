@@ -1,12 +1,17 @@
 import { currentUser } from "@clerk/nextjs";
 import PostCard from "@/components/cards/postcard";
 import { fetchPosts } from "@/lib/actions/post-actions";
+import { fetchUser } from "@/lib/actions/user-actions";
 
 const Home = async () => {
   const user = await currentUser();
   if (!user) return null;
 
   const result = await fetchPosts(1, 30);
+
+  const userDb = await fetchUser(user.id);
+
+  const userLikes = userDb?.likes;
 
   return (
     <>
@@ -26,6 +31,9 @@ const Home = async () => {
                 author={post.author}
                 createdAt={post.createdAt}
                 comments={post.children}
+                userId={userDb._id.toString()}
+                isLiked={userLikes?.includes(post._id.toString()) || false}
+                postId={post._id.toString()}
               />
             ))}
           </>

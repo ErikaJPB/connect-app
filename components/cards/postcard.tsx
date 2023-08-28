@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillReplyAllFill } from "react-icons/bs";
-import { BiRepost } from "react-icons/bi";
 import LikeButton from "../buttons/likebutton";
 import RepostButton from "../buttons/repostbutton";
 
@@ -23,6 +22,8 @@ interface Props {
   }[];
   isComment?: boolean;
   isLiked?: boolean;
+  userId: string;
+  postId: string;
 }
 
 const PostCard = ({
@@ -35,6 +36,8 @@ const PostCard = ({
   comments,
   isComment,
   isLiked,
+  userId,
+  postId,
 }: Props) => {
   return (
     <article
@@ -72,8 +75,8 @@ const PostCard = ({
               <div className="flex gap-3">
                 <LikeButton
                   isLiked={isLiked || false}
-                  userId={currentUserId}
-                  postId={id}
+                  userId={userId}
+                  postId={postId}
                 />
 
                 <Link href={`/post/${id}`}>

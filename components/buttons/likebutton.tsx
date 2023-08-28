@@ -1,12 +1,13 @@
 "use client";
+
 import React, { useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { likePost, unlikePost } from "@/lib/actions/post-actions";
 
 interface LikeButtonProps {
   isLiked: boolean;
-  postId: string; // You'll need to pass the postId
-  userId: string; // You'll need to pass the userId
+  postId: string;
+  userId: string;
 }
 
 function LikeButton({ isLiked, userId, postId }: LikeButtonProps) {
@@ -15,11 +16,12 @@ function LikeButton({ isLiked, userId, postId }: LikeButtonProps) {
   const handleLike = async () => {
     try {
       if (currentLike) {
-        await unlikePost(userId, postId); // Pass both userId and postId
+        await unlikePost(userId, postId);
+        setCurrentLike(false);
       } else {
-        await likePost(userId, postId); // Pass both userId and postId
+        await likePost(userId, postId);
+        setCurrentLike(true);
       }
-      setCurrentLike(!currentLike);
     } catch (error) {
       console.error("Error toggling like:", error);
     }
@@ -30,10 +32,11 @@ function LikeButton({ isLiked, userId, postId }: LikeButtonProps) {
       className="cursor-pointer hover:opacity-75 transition"
       onClick={handleLike}
     >
-      <AiOutlineHeart
-        className={currentLike ? "text-red-500" : "text-black"}
-        size={25}
-      />
+      {currentLike ? (
+        <AiFillHeart className="text-red-700" size={25} />
+      ) : (
+        <AiOutlineHeart className="text-black" size={25} />
+      )}
     </button>
   );
 }

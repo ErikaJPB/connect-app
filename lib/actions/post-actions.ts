@@ -129,22 +129,27 @@ export async function addCommentToPost(
 }
 
 export async function likePost(userId: string, postId: string) {
-  connectToDB();
   try {
-    const post = await Post.findById(postId);
-    const user = await User.findById(userId);
+    connectToDB();
 
-    if (!post || !user) {
+    const user = await User.findById(userId);
+    const post = await Post.findById(postId);
+
+    if (!user || !post) {
       throw new Error("Post or user not found");
+    }
+
+    if (!user.likes.includes(postId)) {
+      user.likes.push(postId);
     }
 
     if (!post.likedBy.includes(userId)) {
       post.likedBy.push(userId);
-      user.likes.push(postId);
+      post.isLiked = true;
     }
 
-    await post.save();
     await user.save();
+    await post.save();
   } catch (error: any) {
     throw new Error(`Error liking post: ${error.message}`);
   }
@@ -161,9 +166,11 @@ export async function unlikePost(userId: string, postId: string) {
     }
 
     if (post.likedBy.includes(userId)) {
-      post.likedBy = post.likedBy.filter((id: string) => id !== userId);
-      user.likes = user.likes.filter((id: string) => id !== postId);
+      post.likedBy.pull(userId);
+      post.isLiked = false;
     }
+
+    user.likes.pull(postId);
 
     await post.save();
     await user.save();
