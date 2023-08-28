@@ -1,11 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/usermodel";
 import Post from "../models/postmodel";
-import Page from "@/app/(auth)/sign-in/[[...sign-in]]/page";
 import { FilterQuery, SortOrder } from "mongoose";
 
 interface Params {

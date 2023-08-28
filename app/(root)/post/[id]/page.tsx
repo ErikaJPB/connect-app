@@ -16,6 +16,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const post = await fetchPostById(params.id);
+  const userDb = await fetchUser(user.id);
+
+  const userLikes = userDb?.likes;
 
   return (
     <section className="relative">
@@ -29,6 +32,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
           author={post.author}
           createdAt={post.createdAt}
           comments={post.children}
+          userId={userDb._id.toString()}
+          isLiked={userLikes?.includes(post._id.toString()) || false}
+          postId={post._id.toString()}
         />
       </div>
 
@@ -52,6 +58,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
             createdAt={comment.createdAt}
             comments={comment.children}
             isComment
+            userId={userDb._id.toString()}
+            isLiked={userLikes?.includes(comment._id.toString()) || false}
+            postId={comment.id.toString()}
           />
         ))}
       </div>
