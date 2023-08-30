@@ -105,3 +105,11 @@ body {
 .user-card-btn {
   @apply h-auto min-w-[74px] rounded-lg bg-secondary text-[12px] text-gray-900 text-body-normal !important;
 }
+
+/* .liked-post {
+  @apply mb-9 !important;
+}
+
+.liked-post.with-parent {
+  @apply -mb-5 !important;
+} */

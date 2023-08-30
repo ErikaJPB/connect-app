@@ -53,7 +53,7 @@ const PostCard = ({
               className="relative h-12 w-12"
             >
               <Image
-                src={author.image}
+                src={author?.image}
                 alt="Profile Image"
                 fill
                 className="rounded-full cursor-pointer"
