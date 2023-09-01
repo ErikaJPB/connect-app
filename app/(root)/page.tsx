@@ -2,12 +2,20 @@ import { currentUser } from "@clerk/nextjs";
 import PostCard from "@/components/cards/postcard";
 import { fetchPosts } from "@/lib/actions/post-actions";
 import { fetchUser } from "@/lib/actions/user-actions";
+import Pagination from "@/components/shared/pagination";
 
-const Home = async () => {
+async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
   const user = await currentUser();
   if (!user) return null;
 
-  const result = await fetchPosts(1, 30);
+  const result = await fetchPosts(
+    searchParams.page ? +searchParams.page : 1,
+    5
+  );
 
   const userDb = await fetchUser(user.id);
 
@@ -39,8 +47,14 @@ const Home = async () => {
           </>
         )}
       </section>
+
+      <Pagination
+        path="/"
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={result.isNext}
+      />
     </>
   );
-};
+}
 
 export default Home;

@@ -113,3 +113,7 @@ body {
 .liked-post.with-parent {
   @apply -mb-5 !important;
 } */
+
+.search-input {
+  @apply bg-secondary text-gray-700 border-none text-base-regular outline-none ml-2 !important;
+}

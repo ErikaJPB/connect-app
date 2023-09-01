@@ -1,10 +1,15 @@
 import { redirect } from "next/navigation";
-
 import { fetchUser, fetchUsers } from "@/lib/actions/user-actions";
 import { currentUser } from "@clerk/nextjs";
 import UserCard from "@/components/cards/usercard";
+import SearchBar from "@/components/shared/searchbar";
+import Pagination from "@/components/shared/pagination";
 
-const Page = async () => {
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
   const user = await currentUser();
   if (!user) return null;
 
@@ -13,16 +18,16 @@ const Page = async () => {
 
   const result = await fetchUsers({
     userId: user.id,
-    searchTerm: "",
-    pageNumber: 1,
-    pageSize: 25,
+    searchTerm: searchParams.q || "",
+    pageNumber: searchParams?.page ? +searchParams.page : 1,
+    pageSize: 5,
   });
 
   return (
     <section>
       <h1 className="head-text mb-10">Search</h1>
 
-      {/* Search Bar */}
+      <SearchBar searchTerm="search" />
 
       <div className="flex flex-col gap-8 mt-15">
         {result.users.length === 0 ? (
@@ -44,8 +49,14 @@ const Page = async () => {
           </>
         )}
       </div>
+
+      <Pagination
+        path="search"
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={result.isNext}
+      />
     </section>
   );
-};
+}
 
 export default Page;

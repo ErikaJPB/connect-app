@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { fetchUserPosts } from "@/lib/actions/user-actions";
 import PostCard from "../cards/postcard";
+import User from "@/lib/models/usermodel";
 
 interface Props {
   currentUserId: string;
@@ -40,6 +41,9 @@ const PostsTab = async ({ currentUserId, accountId, accountType }: Props) => {
           }
           createdAt={post.createdAt}
           comments={post.children}
+          userId={result._id.toString()}
+          isLiked={result.likes?.includes(post._id.toString()) || false}
+          postId={post._id.toString()}
         />
       ))}
     </section>

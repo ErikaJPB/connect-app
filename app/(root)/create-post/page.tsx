@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user-actions";
 import CreatePost from "@/components/forms/createpost";
 
+export const revalidate = 0;
+
 async function Page() {
   const user = await currentUser();
   if (!user) return null;

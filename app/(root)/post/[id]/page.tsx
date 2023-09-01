@@ -6,6 +6,8 @@ import Comment from "@/components/forms/comment";
 import { fetchPostById } from "@/lib/actions/post-actions";
 import { fetchUser } from "@/lib/actions/user-actions";
 
+export const revalidate = 0;
+
 const Page = async ({ params }: { params: { id: string } }) => {
   if (!params.id) return null;
 
