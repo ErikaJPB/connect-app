@@ -5,11 +5,13 @@ import { BsFillReplyAllFill } from "react-icons/bs";
 import { TfiLayoutListPost } from "react-icons/tfi";
 import { AiFillHeart } from "react-icons/ai";
 
-import { fetchUser } from "@/lib/actions/user-actions";
+import { fetchUser, fetchUserLikes } from "@/lib/actions/user-actions";
 import ProfileHeader from "@/components/shared/profileheader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import PostsTab from "@/components/shared/poststab";
+import RepliesTab from "@/components/shared/repliestab";
+import LikesTab from "@/components/shared/likestab";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -52,11 +54,17 @@ async function Page({ params }: { params: { id: string } }) {
               value={tab.value}
               className="w-full text-gray-800"
             >
-              <PostsTab
-                currentUserId={user.id}
-                accountId={userInfo.id}
-                accountType="User"
-              />
+              {tab.value === "posts" && (
+                <PostsTab
+                  currentUserId={user.id}
+                  accountId={userInfo.id}
+                  accountType="User"
+                />
+              )}
+              {tab.value === "replies" && <RepliesTab />}
+              {tab.value === "likes" && (
+                <LikesTab accountId={userInfo._id.toString()} />
+              )}
             </TabsContent>
           ))}
         </Tabs>

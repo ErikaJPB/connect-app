@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 
 import { fetchUserPosts } from "@/lib/actions/user-actions";
 import PostCard from "../cards/postcard";
-import User from "@/lib/models/usermodel";
 
 interface Props {
   currentUserId: string;
