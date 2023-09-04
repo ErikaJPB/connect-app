@@ -21,10 +21,11 @@ export async function createPost({ text, author, path, parentId }: Params) {
       author,
       path,
       parentId,
+      isComment: false,
     });
 
     await User.findByIdAndUpdate(author, {
-      $push: { posts: createPost._id, replies: createPost._id },
+      $push: { posts: createPost._id },
     });
 
     revalidatePath(path);
@@ -117,12 +118,17 @@ export async function addCommentToPost(
       author: userId,
       parentId: postId,
       likedBy: [],
+      isComment: true,
     });
     const savedCommentPost = await commentPost.save();
 
     originalPost.children.push(savedCommentPost._id);
 
     await originalPost.save();
+
+    await User.findByIdAndUpdate(userId, {
+      $push: { replies: savedCommentPost._id },
+    });
 
     revalidatePath(path);
   } catch (error: any) {

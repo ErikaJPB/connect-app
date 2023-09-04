@@ -53,7 +53,15 @@ export async function fetchUser(userId: string) {
   try {
     connectToDB();
 
-    return await User.findOne({ id: userId });
+    return await User.findOne({ id: userId }).populate({
+      path: "replies",
+      model: "Post",
+      populate: {
+        path: "author",
+        model: User,
+        select: "name image id",
+      },
+    });
   } catch (error: any) {
     throw new Error(`Error fetching user: ${error.message}`);
   }
