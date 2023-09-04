@@ -9,9 +9,10 @@ interface Params {
   text: string;
   author: string;
   path: string;
+  parentId?: string;
 }
 
-export async function createPost({ text, author, path }: Params) {
+export async function createPost({ text, author, path, parentId }: Params) {
   try {
     connectToDB();
 
@@ -19,10 +20,11 @@ export async function createPost({ text, author, path }: Params) {
       text,
       author,
       path,
+      parentId,
     });
 
     await User.findByIdAndUpdate(author, {
-      $push: { posts: createPost._id },
+      $push: { posts: createPost._id, replies: createPost._id },
     });
 
     revalidatePath(path);

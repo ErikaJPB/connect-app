@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema({
       ref: "Post",
     },
   ],
+  replies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
+  ],
   onboarded: {
     type: Boolean,
     default: false,

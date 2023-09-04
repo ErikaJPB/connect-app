@@ -175,3 +175,23 @@ export async function fetchUserLikes(userid: string) {
     throw new Error(`Error fetching user likes: ${error.message}`);
   }
 }
+
+export async function fetchUserReplies(userId: string) {
+  try {
+    connectToDB();
+
+    const user = await User.findById(userId).populate({
+      path: "replies",
+      model: Post,
+      populate: {
+        path: "author",
+        model: User,
+        select: "name image _id",
+      },
+    });
+
+    return user?.replies || [];
+  } catch (error: any) {
+    throw new Error(`Error fetching user replies: ${error.message}`);
+  }
+}
