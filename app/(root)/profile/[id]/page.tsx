@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { BsFillReplyAllFill } from "react-icons/bs";
 import { TfiLayoutListPost } from "react-icons/tfi";
@@ -12,6 +12,8 @@ import { profileTabs } from "@/constants";
 import PostsTab from "@/components/shared/poststab";
 import RepliesTab from "@/components/shared/repliestab";
 import LikesTab from "@/components/shared/likestab";
+
+export const revalidate = 0;
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -61,7 +63,9 @@ async function Page({ params }: { params: { id: string } }) {
                   accountType="User"
                 />
               )}
-              {tab.value === "replies" && <RepliesTab />}
+              {tab.value === "replies" && (
+                <RepliesTab accountId={userInfo._id.toString()} />
+              )}
               {tab.value === "likes" && (
                 <LikesTab accountId={userInfo._id.toString()} />
               )}

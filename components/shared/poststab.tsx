@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { fetchUserPosts } from "@/lib/actions/user-actions";
 import PostCard from "../cards/postcard";
 
+export const revalidate = 0;
+
 interface Props {
   currentUserId: string;
   accountId: string;

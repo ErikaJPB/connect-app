@@ -2,12 +2,24 @@ import React from "react";
 import PostCard from "@/components/cards/postcard";
 import { fetchUserLikes } from "@/lib/actions/user-actions";
 
+export const revalidate = 0;
+
 interface Props {
   accountId: string;
 }
 
 const LikesTab = async ({ accountId }: Props) => {
   const userLikes = await fetchUserLikes(accountId);
+
+  if (userLikes.length === 0) {
+    return (
+      <section className="mt-9 flex flex-col gap-10">
+        <p className="text-center text-gray-700 !text-base-regular">
+          No likes yet.
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section className="mt-9 flex flex-col gap-10">
@@ -25,7 +37,7 @@ const LikesTab = async ({ accountId }: Props) => {
           }}
           createdAt={post.createdAt}
           comments={post.children}
-          userId={post.author.id}
+          userId={post.author._id.toString()}
           isLiked={true}
           postId={post._id.toString()}
         />

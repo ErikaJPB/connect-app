@@ -42,6 +42,7 @@ const CreatePost: React.FC<Props> = ({ userId }) => {
     });
 
     router.push("/");
+    router.refresh();
   };
 
   return (
