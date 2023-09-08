@@ -23,6 +23,10 @@ const postSchema = new mongoose.Schema({
   parentId: {
     type: String,
   },
+  originalPost: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+  },
   children: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +38,10 @@ const postSchema = new mongoose.Schema({
     default: false,
   },
   isComment: {
+    type: Boolean,
+    default: false,
+  },
+  isRepost: {
     type: Boolean,
     default: false,
   },

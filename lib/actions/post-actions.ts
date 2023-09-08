@@ -10,6 +10,7 @@ interface Params {
   author: string;
   path: string;
   parentId?: string;
+  originalPostId?: string;
 }
 
 export async function createPost({ text, author, path, parentId }: Params) {
@@ -31,6 +32,33 @@ export async function createPost({ text, author, path, parentId }: Params) {
     revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Error creating post: ${error.message}`);
+  }
+}
+
+export async function createRepost({
+  text,
+  author,
+  path,
+  originalPostId,
+}: Params) {
+  try {
+    connectToDB();
+
+    const createRepost = await Post.create({
+      text,
+      author,
+      path,
+      originalPost: originalPostId,
+      isRepost: true,
+    });
+
+    await User.findByIdAndUpdate(author, {
+      $push: { repost: createRepost._id },
+    });
+
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`Error creating repost: ${error.message}`);
   }
 }
 
