@@ -16,6 +16,12 @@ const postSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  repostedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
@@ -41,7 +47,7 @@ const postSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  isRepost: {
+  isReposted: {
     type: Boolean,
     default: false,
   },

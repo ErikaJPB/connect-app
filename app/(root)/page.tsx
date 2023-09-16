@@ -19,7 +19,10 @@ async function Home({
 
   const userDb = await fetchUser(user.id);
 
+  console.log(userDb);
+
   const userLikes = userDb?.likes;
+  const userReposts = userDb?.reposts;
 
   return (
     <>
@@ -42,6 +45,7 @@ async function Home({
                 userId={userDb._id.toString()}
                 isLiked={userLikes?.includes(post._id.toString()) || false}
                 postId={post._id.toString()}
+                isReposted={userReposts?.includes(post._id.toString()) || false}
               />
             ))}
           </>

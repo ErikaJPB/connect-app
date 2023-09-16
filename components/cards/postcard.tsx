@@ -24,6 +24,7 @@ interface Props {
   isLiked?: boolean;
   userId: string;
   postId: string;
+  isReposted?: boolean;
 }
 
 const PostCard = ({
@@ -38,6 +39,7 @@ const PostCard = ({
   isLiked,
   userId,
   postId,
+  isReposted,
 }: Props) => {
   return (
     <article
@@ -86,7 +88,11 @@ const PostCard = ({
                   />
                 </Link>
 
-                <RepostButton />
+                <RepostButton
+                  isReposted={isReposted || false}
+                  userId={userId}
+                  postId={postId}
+                />
               </div>
               {isComment && comments.length > 0 && (
                 <Link href={`/post/${id}`}>
