@@ -164,11 +164,11 @@ export async function getActivity(userId: string) {
   }
 }
 
-export async function fetchUserLikes(userid: string) {
+export async function fetchUserLikes(userId: string) {
   try {
     connectToDB();
 
-    const user = await User.findById(userid).populate({
+    const user = await User.findById(userId).populate({
       path: "likes",
       model: Post,
       populate: {

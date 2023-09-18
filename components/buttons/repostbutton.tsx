@@ -33,10 +33,12 @@ function RepostButton({ isReposted, userId, postId }: RepostButtonProps) {
       onClick={handleRepost}
     >
       {currentRepost ? (
-        <BiRepost
-          size={25}
-          className="text-gray-500 cursor-pointer object-contain"
-        />
+        <div>
+          <BiRepost
+            size={25}
+            className="text-gray-500 cursor-pointer object-contain"
+          />
+        </div>
       ) : (
         <BiRepost
           size={25}

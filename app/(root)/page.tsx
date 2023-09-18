@@ -19,8 +19,6 @@ async function Home({
 
   const userDb = await fetchUser(user.id);
 
-  console.log(userDb);
-
   const userLikes = userDb?.likes;
   const userReposts = userDb?.reposts;
 

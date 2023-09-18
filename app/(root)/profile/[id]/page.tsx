@@ -12,6 +12,7 @@ import { profileTabs } from "@/constants";
 import PostsTab from "@/components/shared/poststab";
 import RepliesTab from "@/components/shared/repliestab";
 import LikesTab from "@/components/shared/likestab";
+import RepostsTab from "@/components/shared/repoststab";
 
 export const revalidate = 0;
 
@@ -68,6 +69,9 @@ async function Page({ params }: { params: { id: string } }) {
               )}
               {tab.value === "likes" && (
                 <LikesTab accountId={userInfo._id.toString()} />
+              )}
+              {tab.value === "reposts" && (
+                <RepostsTab accountId={userInfo._id.toString()} />
               )}
             </TabsContent>
           ))}

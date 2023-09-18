@@ -4,6 +4,7 @@ import {
   AiFillHeart,
   AiOutlineUser,
 } from "react-icons/ai";
+import { BiRepost } from "react-icons/bi";
 import { TbActivityHeartbeat } from "react-icons/tb";
 import { IoCreateSharp } from "react-icons/io5";
 import { BsFillReplyAllFill } from "react-icons/bs";
@@ -58,5 +59,10 @@ export const profileTabs = [
     icon: AiFillHeart,
     value: "likes",
     label: "Likes",
+  },
+  {
+    icon: BiRepost,
+    value: "reposts",
+    label: "Reposts",
   },
 ];
