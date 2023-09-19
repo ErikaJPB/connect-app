@@ -36,7 +36,7 @@ const RepostsTab = async ({ accountId }: Props) => {
           createdAt={post.createdAt}
           comments={post.children}
           userId={post.author._id.toString()}
-          isLiked={true}
+          isLiked={post.isLiked}
           postId={post._id.toString()}
           isReposted={true}
         />

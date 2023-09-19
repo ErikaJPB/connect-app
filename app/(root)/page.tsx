@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs";
 import PostCard from "@/components/cards/postcard";
 import { fetchPosts } from "@/lib/actions/post-actions";
-import { fetchUser } from "@/lib/actions/user-actions";
+import { fetchUser, fetchUserByUsername } from "@/lib/actions/user-actions";
 import Pagination from "@/components/shared/pagination";
 
 async function Home({
@@ -20,7 +20,27 @@ async function Home({
   const userDb = await fetchUser(user.id);
 
   const userLikes = userDb?.likes;
+
   const userReposts = userDb?.reposts;
+
+  const repostAuthorIdsByPost: Record<string, string[]> = {};
+
+  result.posts.forEach((post) => {
+    const repostAuthorIds = post.repostedBy.map((r: any) => r._id.toString());
+    repostAuthorIdsByPost[post._id.toString()] = repostAuthorIds;
+  });
+
+  const repostAuthorsByPost: Record<string, string[]> = {};
+  for (const postId in repostAuthorIdsByPost) {
+    const authorIds = repostAuthorIdsByPost[postId];
+    const authors = await Promise.all(
+      authorIds.map(async (authorId: string) => {
+        const authorUsername = await fetchUserByUsername(authorId);
+        return authorUsername;
+      })
+    );
+    repostAuthorsByPost[postId] = authors;
+  }
 
   return (
     <>
@@ -30,7 +50,7 @@ async function Home({
           <p className="text-center">No posts found</p>
         ) : (
           <>
-            {result.posts.map((post) => (
+            {result.posts.map((post, index) => (
               <PostCard
                 key={post._id}
                 id={post._id}
@@ -44,6 +64,9 @@ async function Home({
                 isLiked={userLikes?.includes(post._id.toString()) || false}
                 postId={post._id.toString()}
                 isReposted={userReposts?.includes(post._id.toString()) || false}
+                repostAuthorName={repostAuthorsByPost[post._id.toString()].map(
+                  (author) => author.toString() || ""
+                )}
               />
             ))}
           </>

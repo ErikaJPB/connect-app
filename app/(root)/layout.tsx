@@ -2,14 +2,14 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import "../globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 
 import Topbar from "@/components/shared/topbar";
 import LeftSidebar from "@/components/shared/leftsidebar";
 import Bottombar from "@/components/shared/bottombar";
 import RightSidebar from "@/components/shared/rightsidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Roboto({ weight: "400", preload: false });
 
 export const metadata: Metadata = {
   title: "Connect",
@@ -24,13 +24,15 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={font.className}>
           <Topbar />
 
-          <main className="flex flex-row">
+          <main className="flex flex-row p-4  ">
             <LeftSidebar />
             <section className="main-container">
-              <div className="w-full max-w-4xl">{children}</div>
+              <section className="w-full md:-ml-10 max-w-4xl">
+                {children}
+              </section>
             </section>
             <RightSidebar />
           </main>

@@ -12,19 +12,18 @@ body {
 
 @layer components {
   /* Main-container */
-
   .main-container {
-    @apply flex min-h-screen flex-col flex-1 items-center bg-white px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
+    @apply flex min-h-screen flex-1 flex-col items-center bg-white px-6 pb-10 pt-28 lg:-ml-40 max-md:pb-32 sm:px-10;
   }
 
   /* Top Bar */
   .top-bar {
-    @apply fixed top-0 z-30 flex w-full items-center justify-between px-6 py-3;
+    @apply fixed top-0 z-30 flex w-full items-center justify-between mb-8 px-6 py-3 bg-white;
   }
 
   /* Left Sidebar */
-  .left-sidebar {
-    @apply fixed left-0 top-0 z-20 flex h-screen w-1/6 flex-col justify-between overflow-auto border-r pb-5 pt-28 max-md:hidden;
+  .leftside-bar {
+    @apply flex flex-col sticky left-0 top-0 h-screen w-fit justify-between overflow-auto  border-r pb-5 pt-28 max-md:hidden mt-5 bg-white;
   }
 
   /* Main Content */
@@ -34,7 +33,7 @@ body {
 
   /* Right Sidebar */
   .right-sidebar {
-    @apply fixed  mt-6 right-0 top-0 z-20 flex h-screen w-1/6 flex-col justify-between gap-12 overflow-auto border-l  px-10 pb-6 pt-28 max-xl:hidden;
+    @apply fixed  mt-6 right-0 top-0 z-20 flex h-screen w-1/6 flex-col justify-between gap-12 overflow-auto border-l px-10 pb-6 pt-28 max-xl:hidden;
   }
 
   /* Bottom Bar */
@@ -105,14 +104,6 @@ body {
 .user-card-btn {
   @apply h-auto min-w-[74px] rounded-lg bg-secondary text-[12px] text-gray-900 text-body-normal !important;
 }
-
-/* .liked-post {
-  @apply mb-9 !important;
-}
-
-.liked-post.with-parent {
-  @apply -mb-5 !important;
-} */
 
 .search-input {
   @apply bg-secondary text-gray-700 border-none text-base-regular outline-none ml-2 !important;

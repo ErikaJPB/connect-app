@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/usermodel";
 import Post from "../models/postmodel";
-import { FilterQuery, SortOrder } from "mongoose";
+import mongoose, { FilterQuery, SortOrder } from "mongoose";
 
 interface Params {
   userId: string;
@@ -219,5 +219,19 @@ export async function fetchUserReplies(userId: string) {
     return user?.replies || [];
   } catch (error: any) {
     throw new Error(`Error fetching user replies: ${error.message}`);
+  }
+}
+
+export async function fetchUserByUsername(userId: string) {
+  try {
+    connectToDB();
+
+    const user = await User.findOne({
+      _id: new mongoose.Types.ObjectId(userId),
+    }).select("username");
+
+    return user ? user.username : "";
+  } catch (error: any) {
+    throw new Error(`Error fetching user by user ID: ${error.message}`);
   }
 }

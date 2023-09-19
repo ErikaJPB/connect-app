@@ -25,6 +25,7 @@ interface Props {
   userId: string;
   postId: string;
   isReposted?: boolean;
+  repostAuthorName?: string[];
 }
 
 const PostCard = ({
@@ -40,6 +41,7 @@ const PostCard = ({
   userId,
   postId,
   isReposted,
+  repostAuthorName = [],
 }: Props) => {
   return (
     <article
@@ -94,6 +96,12 @@ const PostCard = ({
                   postId={postId}
                 />
               </div>
+
+              {isReposted && repostAuthorName.length > 0 && (
+                <p className="mt-2 text-base-medium text-gray-400">
+                  Reposted by {repostAuthorName?.join(", ")}
+                </p>
+              )}
 
               {isComment && comments.length > 0 && (
                 <Link href={`/post/${id}`}>

@@ -21,7 +21,7 @@ function LeftSidebar() {
   const pathname = usePathname();
 
   return (
-    <section className="flex sticky left-0 top-0 h-screen w-fit flex-col justify-between overflow-auto border-r border pb-5 pt-28 max-md:hidden mt-5">
+    <section className="leftside-bar">
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {sidebarLinks.map((link) => {
           const isActive =

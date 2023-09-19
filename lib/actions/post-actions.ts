@@ -34,13 +34,14 @@ export async function createPost({ text, author, path, parentId }: Params) {
     throw new Error(`Error creating post: ${error.message}`);
   }
 }
-
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   connectToDB();
 
   const skipAmount = (pageNumber - 1) * pageSize;
 
-  const postsQuery = Post.find({ parentId: { $in: [null, undefined] } })
+  const postsQuery = Post.find({
+    $or: [{ parentId: { $in: [null, undefined] } }, { isRepost: true }],
+  })
     .sort({ createdAt: "desc" })
     .skip(skipAmount)
     .limit(pageSize)
@@ -52,10 +53,15 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
         model: User,
         select: "_id name parentId image",
       },
+    })
+    .populate({
+      path: "repostedBy",
+      model: User,
+      select: "_id name",
     });
 
   const totalPostsCount = await Post.countDocuments({
-    parentId: { $in: [null, undefined] },
+    $or: [{ parentId: { $in: [null, undefined] } }, { isRepost: true }],
   });
 
   const posts = await postsQuery.exec();
