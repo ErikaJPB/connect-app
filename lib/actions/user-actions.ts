@@ -235,3 +235,16 @@ export async function fetchUserByUsername(userId: string) {
     throw new Error(`Error fetching user by user ID: ${error.message}`);
   }
 }
+
+export async function fetchSuggestedUsers() {
+  try {
+    connectToDB();
+
+    const suggestedUsers = await User.find().limit(3);
+
+    return suggestedUsers;
+  } catch (error) {
+    console.error("Error fetching suggested users:", error);
+    throw error;
+  }
+}

@@ -243,3 +243,19 @@ export async function deleteRepost(userId: string, postId: string) {
     throw new Error(`Error deleting repost: ${error.message}`);
   }
 }
+
+export async function fetchSuggestedPosts() {
+  try {
+    connectToDB();
+
+    const suggestedPosts = await Post.find()
+      .sort({ createdAt: -1 })
+      .limit(3)
+      .populate("author", "username name image");
+
+    return suggestedPosts;
+  } catch (error) {
+    console.error("Error fetching suggested posts:", error);
+    throw error;
+  }
+}

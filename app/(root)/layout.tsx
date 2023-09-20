@@ -9,6 +9,9 @@ import LeftSidebar from "@/components/shared/leftsidebar";
 import Bottombar from "@/components/shared/bottombar";
 import RightSidebar from "@/components/shared/rightsidebar";
 
+import { fetchSuggestedPosts } from "@/lib/actions/post-actions";
+import { fetchSuggestedUsers } from "@/lib/actions/user-actions";
+
 const font = Roboto({ weight: "400", preload: false });
 
 export const metadata: Metadata = {
@@ -16,11 +19,14 @@ export const metadata: Metadata = {
   description: "A social media App",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const posts = await fetchSuggestedPosts();
+  const users = await fetchSuggestedUsers();
+
   return (
     <ClerkProvider>
       <html lang="en">
@@ -34,7 +40,7 @@ export default function RootLayout({
                 {children}
               </section>
             </section>
-            <RightSidebar />
+            <RightSidebar posts={posts} users={users} />
           </main>
 
           <Bottombar />
