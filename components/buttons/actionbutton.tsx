@@ -11,13 +11,28 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deletePost } from "@/lib/actions/post-actions";
 
-function ActionButton() {
+interface ActionButtonProps {
+  userId: string;
+  postId: string;
+}
+
+function ActionButton({ postId, userId }: ActionButtonProps) {
   const handleEdit = () => {
     console.log("Edit Post");
   };
-  const handleDelete = () => {
-    console.log("Delete Post");
+
+  const handleDelete = async () => {
+    try {
+      const result = await deletePost(postId, userId);
+
+      if (result.success) {
+        console.log("Post deleted successfully");
+      }
+    } catch (error: any) {
+      console.error("Error deleting post", error);
+    }
   };
 
   return (

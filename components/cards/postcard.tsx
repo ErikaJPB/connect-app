@@ -11,6 +11,7 @@ interface Props {
   parentId: string | null;
   content: string;
   author: {
+    username: string;
     name: string;
     image: string;
     id: string;
@@ -46,6 +47,8 @@ const PostCard = ({
 }: Props) => {
   const isAuthorCurrentUser = author.id === currentUserId;
 
+  console.log;
+
   return (
     <article
       className={`flex flex-col w-full rounded-xl ${
@@ -72,7 +75,7 @@ const PostCard = ({
           <div className="flex flex-col w-full">
             <Link href={`/profile/${author?.id}`} className="w-fit">
               <h4 className="cursor-pointer text-gray-700 text-base-semibold">
-                {author?.name}
+                {author?.username}
               </h4>
             </Link>
 
@@ -99,7 +102,9 @@ const PostCard = ({
                   postId={postId}
                 />
 
-                {isAuthorCurrentUser && <ActionButton />}
+                {isAuthorCurrentUser && (
+                  <ActionButton postId={postId} userId={userId} />
+                )}
               </div>
 
               {isReposted && repostAuthorName.length > 0 && (

@@ -259,3 +259,35 @@ export async function fetchSuggestedPosts() {
     throw error;
   }
 }
+
+export async function deletePost(postId: string, userId: string) {
+  try {
+    connectToDB();
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    if (post.author.toString() !== userId) {
+      throw new Error("User is not the author of the post");
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    user.posts.pull(postId);
+
+    await post.deleteOne();
+
+    await user.save();
+
+    revalidatePath(`/profile/${userId}`);
+
+    return { success: true };
+  } catch (error: any) {
+    throw new Error(`Error deleting post: ${error.message}`);
+  }
+}
