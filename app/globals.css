@@ -108,3 +108,7 @@ body {
 .search-input {
   @apply bg-secondary text-gray-700 border-none text-base-regular outline-none ml-2 !important;
 }
+
+.drop-down-menu {
+  @apply bg-secondary text-gray-700 !important;
+}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BsFillReplyAllFill } from "react-icons/bs";
 import LikeButton from "../buttons/likebutton";
 import RepostButton from "../buttons/repostbutton";
+import ActionButton from "../buttons/actionbutton";
 
 interface Props {
   id: string;
@@ -43,6 +44,8 @@ const PostCard = ({
   isReposted,
   repostAuthorName = [],
 }: Props) => {
+  const isAuthorCurrentUser = author.id === currentUserId;
+
   return (
     <article
       className={`flex flex-col w-full rounded-xl ${
@@ -95,6 +98,8 @@ const PostCard = ({
                   userId={userId}
                   postId={postId}
                 />
+
+                {isAuthorCurrentUser && <ActionButton />}
               </div>
 
               {isReposted && repostAuthorName.length > 0 && (
