@@ -110,5 +110,9 @@ body {
 }
 
 .drop-down-menu {
-  @apply bg-secondary text-gray-700 !important;
+  @apply bg-secondary text-gray-700 justify-items-center !important;
+}
+
+.drop-down-menu-item {
+  @apply text-black mr-2 h-4 w-4 !important;
 }
