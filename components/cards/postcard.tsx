@@ -103,7 +103,11 @@ const PostCard = ({
                 />
 
                 {isAuthorCurrentUser && (
-                  <ActionButton postId={postId} userId={userId} />
+                  <ActionButton
+                    postId={postId}
+                    userId={userId}
+                    content={content}
+                  />
                 )}
               </div>
 
