@@ -165,6 +165,10 @@ export async function likePost(userId: string, postId: string) {
 
     await user.save();
     await post.save();
+
+    revalidatePath(`/profile/${userId}`);
+
+    return { success: true };
   } catch (error: any) {
     throw new Error(`Error liking post: ${error.message}`);
   }
@@ -189,6 +193,10 @@ export async function unlikePost(userId: string, postId: string) {
 
     await post.save();
     await user.save();
+
+    revalidatePath(`/profile/${userId}`);
+
+    return { success: true };
   } catch (error: any) {
     throw new Error(`Error unliking post: ${error.message}`);
   }
@@ -216,6 +224,10 @@ export async function createRepost(userId: string, postId: string) {
 
     await user.save();
     await post.save();
+
+    revalidatePath(`/profile/${userId}`);
+
+    return { success: true };
   } catch (error: any) {
     throw new Error(`Error reposting post: ${error.message}`);
   }
@@ -239,6 +251,10 @@ export async function deleteRepost(userId: string, postId: string) {
 
     await post.save();
     await user.save();
+
+    revalidatePath(`/profile/${userId}`);
+
+    return { success: true };
   } catch (error: any) {
     throw new Error(`Error deleting repost: ${error.message}`);
   }
@@ -281,7 +297,6 @@ export async function deletePost(postId: string, userId: string) {
     user.posts.pull(postId);
 
     await post.deleteOne();
-
     await user.save();
 
     revalidatePath(`/profile/${userId}`);
@@ -289,5 +304,34 @@ export async function deletePost(postId: string, userId: string) {
     return { success: true };
   } catch (error: any) {
     throw new Error(`Error deleting post: ${error.message}`);
+  }
+}
+
+export async function editPost(
+  postId: string,
+  userId: string,
+  newContent: string
+) {
+  try {
+    connectToDB();
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    if (post.author.toString() !== userId) {
+      throw new Error("User is not the author of the post");
+    }
+
+    post.text = newContent;
+    await post.save();
+
+    revalidatePath(`/profile/${userId}`);
+
+    return { success: true };
+  } catch (error: any) {
+    throw new Error(`Error editing post: ${error.message}`);
   }
 }

@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { deletePost } from "@/lib/actions/post-actions";
+import { deletePost, editPost } from "@/lib/actions/post-actions";
 
 interface ActionButtonProps {
   userId: string;
@@ -23,7 +23,7 @@ function ActionButton({ postId, userId, content }: ActionButtonProps) {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const [EditedContent, setEditedContent] = useState(content);
+  const [editedContent, setEditedContent] = useState(content);
 
   const openEditModal = () => {
     setIsEditModalOpen(true);
@@ -41,8 +41,17 @@ function ActionButton({ postId, userId, content }: ActionButtonProps) {
     setIsDeleteModalOpen(false);
   };
 
-  const handleEdit = () => {
-    console.log("Edit Post");
+  const handleEdit = async () => {
+    try {
+      const result = await editPost(postId, userId, editedContent);
+
+      if (result.success) {
+        console.log("Post edited successfully");
+        closeEditModal();
+      }
+    } catch (error: any) {
+      console.error("Error editing post", error);
+    }
   };
 
   const handleDelete = async () => {
@@ -114,7 +123,7 @@ function ActionButton({ postId, userId, content }: ActionButtonProps) {
             <h2 className="text-xl font-semibold mb-4">Edit Post</h2>
             <textarea
               className="w-full h-52 p-2 border rounded-md resize-none"
-              value={EditedContent}
+              value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
             />
             <div className="flex justify-end mt-4">
