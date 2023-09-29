@@ -33,11 +33,13 @@ const PostsTab = async ({ currentUserId, accountId, accountType }: Props) => {
                   name: result.name,
                   image: result.image,
                   id: result.id,
+                  username: result.username,
                 }
               : {
                   name: post.author.name,
                   image: post.author.image,
                   id: post.author.id,
+                  username: post.author.username,
                 }
           }
           createdAt={post.createdAt}

@@ -2,7 +2,6 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 
 import "../globals.css";
 
@@ -22,9 +21,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className}`}>
-          <div className="w-full flex justify-center items-center min-h-screen">
+          <section className="w-full flex justify-center items-center min-h-screen">
             {children}
-          </div>
+          </section>
         </body>
       </html>
     </ClerkProvider>
