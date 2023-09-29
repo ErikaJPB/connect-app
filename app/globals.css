@@ -13,27 +13,27 @@ body {
 @layer components {
   /* Main-container */
   .main-container {
-    @apply flex min-h-screen flex-1 flex-col items-center bg-white px-6 pb-10 pt-28 lg:-ml-40 max-md:pb-32 sm:px-10;
+    @apply flex min-h-screen flex-1 flex-col items-center bg-white mt-8 px-6 pb-10 pt-28 lg:-ml-40 max-md:pb-32 sm:px-10;
   }
 
   /* Top Bar */
   .top-bar {
-    @apply fixed top-0 z-30 flex w-full items-center justify-between mb-8 px-6 py-3 bg-white;
+    @apply fixed top-0 z-30 flex w-full items-center justify-between mb-8 px-8 py-2 bg-white;
   }
 
   /* Left Sidebar */
   .leftside-bar {
-    @apply flex flex-col sticky left-0 top-0 h-screen w-fit justify-between overflow-auto  border-r pb-5 pt-28 max-md:hidden mt-5 bg-white;
+    @apply flex flex-col sticky left-0 top-0 h-screen w-fit justify-between overflow-auto  border-r pb-5 pt-28 max-md:hidden mt-8  bg-white;
   }
 
   /* Main Content */
   .main-content {
-    @apply flex-grow bg-white p-4;
+    @apply flex-grow bg-white  p-4;
   }
 
   /* Right Sidebar */
   .right-sidebar {
-    @apply fixed  mt-6 right-0 top-0 z-20 flex h-screen w-1/6 flex-col justify-between gap-12 overflow-auto border-l px-10 pb-6 pt-28 max-xl:hidden;
+    @apply fixed  mt-8 right-0 top-0 z-20 flex h-screen w-1/6 flex-col justify-between gap-12 overflow-auto border-l px-10 pb-6 pt-28 max-xl:hidden;
   }
 
   /* Bottom Bar */
@@ -115,4 +115,8 @@ body {
 
 .drop-down-menu-item {
   @apply text-black mr-2 h-4 w-4 !important;
+}
+
+.button-landing {
+  @apply bg-secondary hover:bg-primary hover:text-white text-black  rounded  !important;
 }

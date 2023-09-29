@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 
 import "../globals.css";
 import type { Metadata } from "next";
@@ -11,6 +12,7 @@ import RightSidebar from "@/components/shared/rightsidebar";
 
 import { fetchSuggestedPosts } from "@/lib/actions/post-actions";
 import { fetchSuggestedUsers } from "@/lib/actions/user-actions";
+import LandingPage from "@/components/shared/landing";
 
 const font = Roboto({ weight: "400", preload: false });
 
@@ -24,12 +26,27 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const user = await currentUser();
   const posts = await fetchSuggestedPosts();
   const users = await fetchSuggestedUsers();
 
+  if (!user) {
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <body className={font.className}>
+          <main>
+            <section>
+              <LandingPage />
+            </section>
+          </main>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
           <Topbar />
 
