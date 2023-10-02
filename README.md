@@ -4,7 +4,7 @@
 
 <br>
 
-**"Connect"** is a web application inspired by Twitter, with a focus on upcoming features like Threads (Meta). It empowers users to create an account, establish a personalized profile, and easily upload or update their profile pictures. The platform boasts full responsiveness, enabling seamless usage across various devices. Users can compose, edit, delete, like, and repost posts, fostering an engaging social experience.
+**"Connect"** is a web application inspired by Twitter, and newly released Threads app (By Meta). It empowers users to create an account, establish a personalized profile, and easily upload or update their profile pictures. The platform boasts full responsiveness, enabling seamless usage across various devices. Users can compose, edit, delete, like, and repost posts, fostering an engaging social experience.
 
 <br>
 
