@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const LandingPage = () => {
   return (
-    <div className="flex items-center justify-center text-center min-h-screen bg-white gap-8">
+    <div className="flex flex-col lg:flex-row items-center justify-center text-center min-h-screen bg-white gap-8">
       <div className="flex flex-col text-heading4-medium text-center items-center max-w-md gap-2 px-8">
-        <div className="mb-4 py-6 ">
+        <div className="mb-4 py-6">
           <Image
             src="/logo.svg"
             alt="Vector Logo"
@@ -38,7 +38,7 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className="flex lg:hidden justify-center items-center">
+      <div className="lg:hidden justify-center items-center">
         <Image
           src="/connect-people.png"
           alt="People Vector"
