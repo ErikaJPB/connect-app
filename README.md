@@ -1,34 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Connect a Social Network
 
-## Getting Started
+## Description
 
-First, run the development server:
+<br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+**"Connect"** is a web application inspired by Twitter, with a focus on upcoming features like Threads (Meta). It empowers users to create an account, establish a personalized profile, and easily upload or update their profile pictures. The platform boasts full responsiveness, enabling seamless usage across various devices. Users can compose, edit, delete, like, and repost posts, fostering an engaging social experience.
+
+<br>
+
+### Project Details:
+
+Frontend Technology: This project is primarily built using Next.js 13, which leverages app routing for efficient navigation. TypeScript enhances type safety and code quality, while TailwindCSS ensures a sleek and intuitive user interface.
+
+**Database**: The application utilizes MongoDB as its backend database, providing a robust and flexible storage solution for your social network's data.
+
+**Authorization**: User authentication and authorization are seamlessly handled through Clerk, ensuring secure access control and a smooth user experience.
+
+**UI Components**: To streamline development, select UI components are sourced from shadcn/ui, offering pre-built building blocks for your application's user interface.
+
+<br>
+
+## Installation and Usage
+
+To run this project on your own machine you will need to clone the repository, create a MongoDb database, setup your Clerk account, and uploadthing to manage the profile pictures.
+
+1. Clone this repository: git clone `https://github.com/ErikaJPB/connect-app`
+
+2. Navigate to the project directory: `cd connect-app`
+
+3. Install the dependencies: `npm install`
+
+4. Create a `.env.local ` file and add your keys as follows "
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboarding
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+MONGODB_URL=
+
+
+UPLOADTHING_SECRET=
+
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Run the development server: `npm run dev`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+6. Open http://localhost:3000 in your browser to see the website.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<br>
 
-## Learn More
+#### Features:
 
-To learn more about Next.js, take a look at the following resources:
+**User Profiles**: Users can create and customize their profiles, including the option to upload or change their profile pictures.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Post Management**: The platform enables users to create, edit, and delete posts, fostering dynamic content creation.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Engagement**: Users can interact with posts by liking and reposting, enhancing social interaction and engagement.
 
-## Deploy on Vercel
+<br>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Acknowledgments:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I'd like to express my gratitude to **JavaScript Mastery**. Their tutorial served as the initial inspiration for starting this project and provided valuable insights, even though I may have diverged from their course of action.

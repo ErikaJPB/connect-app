@@ -116,7 +116,3 @@ body {
 .drop-down-menu-item {
   @apply text-black mr-2 h-4 w-4 !important;
 }
-
-.button-landing {
-  @apply bg-secondary hover:bg-primary hover:text-white text-black  rounded  !important;
-}
