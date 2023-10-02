@@ -34,6 +34,7 @@ const LikesTab = async ({ accountId }: Props) => {
             name: post.author.name,
             image: post.author.image,
             id: post.author.id,
+            username: post.author.username,
           }}
           createdAt={post.createdAt}
           comments={post.children}
