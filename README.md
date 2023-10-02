@@ -10,13 +10,13 @@
 
 ### Project Details:
 
-Frontend Technology: This project is primarily built using Next.js 13, which leverages app routing for efficient navigation. TypeScript enhances type safety and code quality, while TailwindCSS ensures a sleek and intuitive user interface.
+**Frontend Technology**: This project is primarily built using Next.js 13, which leverages app routing for efficient navigation. TypeScript enhances type safety and code quality, while TailwindCSS ensures a sleek and intuitive user interface.
 
-**Database**: The application utilizes MongoDB as its backend database, providing a robust and flexible storage solution for your social network's data.
+**Database**: The application utilizes MongoDB as its backend database, providing a robust and flexible storage solution for the social network's data.
 
 **Authorization**: User authentication and authorization are seamlessly handled through Clerk, ensuring secure access control and a smooth user experience.
 
-**UI Components**: To streamline development, select UI components are sourced from shadcn/ui, offering pre-built building blocks for your application's user interface.
+**UI Components**: To streamline development, select UI components are sourced from shadcn/ui, offering pre-built building blocks for the application's user interface.
 
 <br>
 
