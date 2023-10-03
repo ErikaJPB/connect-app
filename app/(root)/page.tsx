@@ -1,8 +1,9 @@
 import { currentUser } from "@clerk/nextjs";
 import PostCard from "@/components/cards/postcard";
-import { fetchPosts } from "@/lib/actions/post-actions";
+import { fetchComments, fetchPosts } from "@/lib/actions/post-actions";
 import { fetchUser, fetchUserByUsername } from "@/lib/actions/user-actions";
 import Pagination from "@/components/shared/pagination";
+import CommentCard from "@/components/cards/commentcard";
 
 async function Home({
   searchParams,
@@ -19,10 +20,11 @@ async function Home({
     5
   );
 
+  const postIds = result.posts.map((p: any) => p._id.toString());
+
   const userDb = await fetchUser(user.id);
 
   const userLikes = userDb?.likes;
-
   const userReposts = userDb?.reposts;
 
   const repostAuthorIdsByPost: Record<string, string[]> = {};
@@ -44,23 +46,31 @@ async function Home({
     repostAuthorsByPost[postId] = authors;
   }
 
+  const commentsByPost: Record<string, any[]> = {};
+
+  for (const postId of postIds) {
+    const postComments = await fetchComments(postId);
+    commentsByPost[postId] = postComments;
+  }
+
+  // console.log(commentsByPost);
+
   return (
     <>
       <h1 className="head-text text-left">Home</h1>
-      <div className="flex flex-col mt-4 gap-8 ">
+      <section className="flex flex-col mt-9 gap-10 ">
         {result.posts.length === 0 ? (
           <p className="text-center">No posts found</p>
         ) : (
           <>
             {result.posts.map((post, index) => (
               <div key={post._id}>
-                {!post.parentId && (
+                {!post.parentId && post.children ? (
                   <PostCard
                     id={post._id}
                     currentUserId={user?.id || ""}
                     parentId={post.parentId}
                     content={post.text}
-                    comments={post.children}
                     author={post.author}
                     createdAt={post.createdAt}
                     userId={userDb._id.toString()}
@@ -72,50 +82,39 @@ async function Home({
                     repostAuthorName={repostAuthorsByPost[
                       post._id.toString()
                     ].map((author) => author.toString() || "")}
-                    isComment={false}
+                    comments={commentsByPost[post._id.toString()] || []}
                   />
-                )}
-
-                {post.children.length > 0 && (
-                  <div className="mt-2 gap-10 rounded-xl bg-gray-100 py-2">
-                    {post.children.map((comment: any) => (
-                      <div className="flex flex-col mt-2" key={comment._id}>
-                        <PostCard
-                          id={comment._id}
-                          currentUserId={comment?.id || ""}
-                          parentId={comment.parentId}
-                          comments={comment.children}
-                          content={comment.text}
-                          author={comment.author}
-                          createdAt={comment.createdAt}
-                          userId={userDb._id.toString()}
-                          isLiked={
-                            userLikes?.includes(comment._id.toString()) || false
-                          }
-                          postId={comment.id.toString()}
-                          isReposted={
-                            userReposts?.includes(comment._id.toString()) ||
-                            false
-                          }
-                          repostAuthorName={repostAuthorsByPost[
-                            comment._id.toString()
-                          ]?.map((author) => author.toString() || "")}
-                          isComment={true}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                ) : null}
+                {commentsByPost[post._id.toString()]?.map((comment) => (
+                  <CommentCard
+                    key={comment._id}
+                    id={comment._id}
+                    currentUserId={user?.id || ""}
+                    parentId={comment.parentId}
+                    content={comment.text}
+                    author={comment.author}
+                    createdAt={comment.createdAt}
+                    userId={userDb._id.toString()}
+                    isLiked={
+                      userLikes?.includes(comment._id.toString()) || false
+                    }
+                    postId={post._id.toString()}
+                    isReposted={
+                      userReposts?.includes(comment._id.toString()) || false
+                    }
+                  />
+                ))}
               </div>
             ))}
           </>
         )}
-      </div>
-
+      </section>
       <Pagination
         path="/"
         pageNumber={searchParams?.page ? +searchParams.page : 1}
-        isNext={result.isNext}
+        isNext={
+          result ? result.posts.length > 0 && result.posts.length === 5 : false
+        }
       />
     </>
   );

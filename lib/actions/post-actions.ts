@@ -335,3 +335,26 @@ export async function editPost(
     throw new Error(`Error editing post: ${error.message}`);
   }
 }
+
+export async function fetchComments(postId: string) {
+  try {
+    connectToDB();
+
+    const post = await Post.findById(postId).populate({
+      path: "children",
+      populate: {
+        path: "author",
+        model: User,
+        select: "_id name parentId image username text",
+      },
+    });
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    return post.children;
+  } catch (error: any) {
+    throw new Error(`Error fetching comments: ${error.message}`);
+  }
+}
