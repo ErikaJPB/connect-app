@@ -25,7 +25,7 @@ const Page = async () => {
                 key={activityItem._id}
                 href={`/post/${activityItem.parentId}`}
               >
-                <article className="flex items-center gap-2 rounded-md bg-secondary px-7 py-4">
+                <div className="flex items-center gap-2 rounded-md bg-secondary px-7 py-4">
                   <div className="relative h-8 w-8 object-cover">
                     <Image
                       src={activityItem.author.image}
@@ -44,7 +44,7 @@ const Page = async () => {
                       <>Replied to your post</>
                     )}
                   </p>
-                </article>
+                </div>
               </Link>
             ))}
           </>

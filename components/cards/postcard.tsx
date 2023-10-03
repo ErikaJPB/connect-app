@@ -98,12 +98,14 @@ const PostCard = ({
                   postId={postId}
                 />
 
-                <Link href={`/post/${id}`}>
-                  <BsFillReplyAllFill
-                    size={25}
-                    className="text-black cursor-pointer object-contain"
-                  />
-                </Link>
+                {!isComment && (
+                  <Link href={`/post/${id}`}>
+                    <BsFillReplyAllFill
+                      size={25}
+                      className="text-black cursor-pointer object-contain"
+                    />
+                  </Link>
+                )}
 
                 <RepostButton
                   isReposted={isReposted || false}

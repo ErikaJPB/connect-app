@@ -52,11 +52,9 @@ export default async function RootLayout({
 
           <main className="flex flex-row p-4  ">
             <LeftSidebar />
-            <section className="main-container">
-              <section className="w-full md:-ml-10 max-w-4xl">
-                {children}
-              </section>
-            </section>
+            <div className="main-container">
+              <div className="w-full md:-ml-10 max-w-4xl">{children}</div>
+            </div>
             <RightSidebar posts={posts} users={users} />
           </main>
 

@@ -1,6 +1,7 @@
 import React from "react";
 import PostCard from "@/components/cards/postcard";
 import { fetchUserReplies } from "@/lib/actions/user-actions";
+import CommentCard from "../cards/commentcard";
 
 export const revalidate = 0;
 
@@ -23,7 +24,7 @@ const RepliesTab = async ({ accountId }: Props) => {
   return (
     <div className="mt-9 flex flex-col gap-10">
       {userReplies.map((post: any) => (
-        <PostCard
+        <CommentCard
           key={post._id}
           id={post._id}
           currentUserId={accountId}
@@ -36,10 +37,10 @@ const RepliesTab = async ({ accountId }: Props) => {
             username: post.author.username,
           }}
           createdAt={post.createdAt}
-          comments={post.children}
           userId={post.author._id.toString()}
           isLiked={post.isLiked || false}
           postId={post._id.toString()}
+          isComment={post.isComment}
         />
       ))}
     </div>

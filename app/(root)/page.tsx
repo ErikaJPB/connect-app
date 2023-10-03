@@ -83,6 +83,7 @@ async function Home({
                       post._id.toString()
                     ].map((author) => author.toString() || "")}
                     comments={commentsByPost[post._id.toString()] || []}
+                    isComment={post.isComment}
                   />
                 ) : null}
                 {commentsByPost[post._id.toString()]?.map((comment) => (
@@ -102,6 +103,7 @@ async function Home({
                     isReposted={
                       userReposts?.includes(comment._id.toString()) || false
                     }
+                    isComment={comment.isComment}
                   />
                 ))}
               </div>

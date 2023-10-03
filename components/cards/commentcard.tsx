@@ -22,6 +22,7 @@ interface CommentProps {
   postId: string;
   isReposted?: boolean;
   repostAuthorName?: string[];
+  isComment?: boolean;
 }
 
 const CommentCard = ({
@@ -31,6 +32,7 @@ const CommentCard = ({
   content,
   author,
   createdAt,
+  isComment,
   isLiked,
   userId,
   postId,
@@ -76,12 +78,14 @@ const CommentCard = ({
                   postId={postId}
                 />
 
-                <Link href={`/post/${id}`}>
-                  <BsFillReplyAllFill
-                    size={25}
-                    className="text-black cursor-pointer object-contain"
-                  />
-                </Link>
+                {!isComment && (
+                  <Link href={`/post/${id}`}>
+                    <BsFillReplyAllFill
+                      size={25}
+                      className="text-black cursor-pointer object-contain"
+                    />
+                  </Link>
+                )}
 
                 <RepostButton
                   isReposted={isReposted || false}
