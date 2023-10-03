@@ -1,9 +1,8 @@
 import { redirect } from "next/navigation";
-
-import { fetchUser, getActivity } from "@/lib/actions/user-actions";
-import { currentUser } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
+import { currentUser } from "@clerk/nextjs";
+import { fetchUser, getActivity } from "@/lib/actions/user-actions";
 
 const Page = async () => {
   const user = await currentUser();
@@ -21,12 +20,15 @@ const Page = async () => {
       <section className="flex flex-col mt-10 gap-5">
         {activity.length > 0 ? (
           <>
-            {activity.map((activity) => (
-              <Link key={activity._id} href={`/post/${activity.parentId}`}>
+            {activity.map((activityItem) => (
+              <Link
+                key={activityItem._id}
+                href={`/post/${activityItem.parentId}`}
+              >
                 <article className="flex items-center gap-2 rounded-md bg-secondary px-7 py-4">
                   <div className="relative h-8 w-8 object-cover">
                     <Image
-                      src={activity.author.image}
+                      src={activityItem.author.image}
                       alt="Profile Image"
                       fill
                       className="rounded-full object-cover"
@@ -34,9 +36,13 @@ const Page = async () => {
                   </div>
                   <p className="!text-small-regular text-gray-600">
                     <span className="mr-1 text-primary">
-                      {activity.author.name}
-                    </span>{" "}
-                    Replied to your post
+                      {activityItem.author.name}
+                    </span>
+                    {activityItem.isLike ? (
+                      <>Liked your post</>
+                    ) : (
+                      <>Replied to your post</>
+                    )}
                   </p>
                 </article>
               </Link>

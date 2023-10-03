@@ -51,7 +51,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
       populate: {
         path: "author",
         model: User,
-        select: "_id name parentId image",
+        select: "_id name parentId image username",
       },
     })
     .populate({
@@ -79,7 +79,7 @@ export async function fetchPostById(id: string) {
       .populate({
         path: "author",
         model: User,
-        select: "_id name image",
+        select: "_id name image username",
       })
       .populate({
         path: "children",
@@ -87,7 +87,7 @@ export async function fetchPostById(id: string) {
           {
             path: "author",
             model: User,
-            select: "_id name parentId image",
+            select: "_id name parentId image username",
           },
           {
             path: "children",
@@ -95,7 +95,7 @@ export async function fetchPostById(id: string) {
             populate: {
               path: "author",
               model: User,
-              select: "_id id name parentId image",
+              select: "_id id name parentId image username",
             },
           },
         ],

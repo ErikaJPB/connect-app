@@ -23,7 +23,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   const userLikes = userDb?.likes;
 
   return (
-    <section className="relative">
+    <div className="relative">
       <div>
         <PostCard
           key={post._id}
@@ -66,7 +66,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

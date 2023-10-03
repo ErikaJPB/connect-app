@@ -18,6 +18,7 @@ interface Props {
   };
   createdAt: string;
   comments: {
+    _id: string;
     author: {
       image: string;
     };
@@ -50,7 +51,7 @@ const PostCard = ({
   console.log;
 
   return (
-    <article
+    <div
       className={`flex flex-col w-full rounded-xl ${
         isComment ? "px-0 xs:px-7" : "bg-secondary p-7"
       }`}
@@ -69,6 +70,7 @@ const PostCard = ({
                 className="rounded-full cursor-pointer"
               />
             </Link>
+
             <div className="mt-2 relative w-0.5 grow rounded-full bg-neutral-600" />
           </div>
 
@@ -81,7 +83,11 @@ const PostCard = ({
 
             <p className="mt-2 text-base-medium text-gray-800">{content}</p>
 
-            <div className={`${isComment && "mb-10"} flex flex-col mt-5 gap-3`}>
+            <div
+              className={`${
+                isComment && "mb-2 py-1"
+              } flex flex-col mt-4 py-2 gap-3`}
+            >
               <div className="flex gap-3">
                 <LikeButton
                   isLiked={isLiked || false}
@@ -128,7 +134,7 @@ const PostCard = ({
           </div>
         </div>
       </div>
-    </article>
+    </div>
   );
 };
 

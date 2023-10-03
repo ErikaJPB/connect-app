@@ -174,7 +174,7 @@ export async function fetchUserLikes(userId: string) {
       populate: {
         path: "author",
         model: User,
-        select: "name image _id",
+        select: "name image _id username",
       },
     });
 
@@ -193,7 +193,7 @@ export async function fetchUserReposts(userId: string) {
       populate: {
         path: "author",
         model: User,
-        select: "name image _id",
+        select: "name image _id username",
       },
     });
     return user?.reposts || [];
@@ -212,7 +212,7 @@ export async function fetchUserReplies(userId: string) {
       populate: {
         path: "author",
         model: User,
-        select: "name image _id",
+        select: "name image _id username",
       },
     });
 

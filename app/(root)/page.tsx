@@ -47,33 +47,70 @@ async function Home({
   return (
     <>
       <h1 className="head-text text-left">Home</h1>
-      <section className="flex flex-col mt-9 gap-10 ">
+      <div className="flex flex-col mt-4 gap-8 ">
         {result.posts.length === 0 ? (
           <p className="text-center">No posts found</p>
         ) : (
           <>
             {result.posts.map((post, index) => (
-              <PostCard
-                key={post._id}
-                id={post._id}
-                currentUserId={user?.id || ""}
-                parentId={post.parentId}
-                content={post.text}
-                author={post.author}
-                createdAt={post.createdAt}
-                comments={post.children}
-                userId={userDb._id.toString()}
-                isLiked={userLikes?.includes(post._id.toString()) || false}
-                postId={post._id.toString()}
-                isReposted={userReposts?.includes(post._id.toString()) || false}
-                repostAuthorName={repostAuthorsByPost[post._id.toString()].map(
-                  (author) => author.toString() || ""
+              <div key={post._id}>
+                {!post.parentId && (
+                  <PostCard
+                    id={post._id}
+                    currentUserId={user?.id || ""}
+                    parentId={post.parentId}
+                    content={post.text}
+                    comments={post.children}
+                    author={post.author}
+                    createdAt={post.createdAt}
+                    userId={userDb._id.toString()}
+                    isLiked={userLikes?.includes(post._id.toString()) || false}
+                    postId={post._id.toString()}
+                    isReposted={
+                      userReposts?.includes(post._id.toString()) || false
+                    }
+                    repostAuthorName={repostAuthorsByPost[
+                      post._id.toString()
+                    ].map((author) => author.toString() || "")}
+                    isComment={false}
+                  />
                 )}
-              />
+
+                {post.children.length > 0 && (
+                  <div className="mt-2 gap-10 rounded-xl bg-gray-100 py-2">
+                    {post.children.map((comment: any) => (
+                      <div className="flex flex-col mt-2" key={comment._id}>
+                        <PostCard
+                          id={comment._id}
+                          currentUserId={comment?.id || ""}
+                          parentId={comment.parentId}
+                          comments={comment.children}
+                          content={comment.text}
+                          author={comment.author}
+                          createdAt={comment.createdAt}
+                          userId={userDb._id.toString()}
+                          isLiked={
+                            userLikes?.includes(comment._id.toString()) || false
+                          }
+                          postId={comment.id.toString()}
+                          isReposted={
+                            userReposts?.includes(comment._id.toString()) ||
+                            false
+                          }
+                          repostAuthorName={repostAuthorsByPost[
+                            comment._id.toString()
+                          ]?.map((author) => author.toString() || "")}
+                          isComment={true}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </>
         )}
-      </section>
+      </div>
 
       <Pagination
         path="/"

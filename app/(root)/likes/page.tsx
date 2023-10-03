@@ -16,19 +16,13 @@ const LikesPage = async () => {
   for (const like of likes) {
     const post = await fetchPostById(like._id.toString());
 
-    // Include the parent post in the likedPosts array
-    if (post.parentId) {
-      const thread = await fetchPostById(post.parentId);
-      likedPosts.push(thread);
-    }
-
     likedPosts.push(post);
   }
 
   return (
-    <section>
+    <div>
       <h1 className="head-text mb-10">Likes</h1>
-      <section className="flex flex-col mt-9 gap-10 ">
+      <div className="flex flex-col mt-9 gap-10 ">
         {likedPosts.map((post: any, index: number) => (
           <div
             key={post._id}
@@ -36,7 +30,7 @@ const LikesPage = async () => {
               post.parentId &&
               !userLikes?.includes(post.parentId) &&
               index !== 0
-                ? "-mt-9 mb-5" // Reduce margin-top for non-liked parent with liked child
+                ? "-mt-9 mb-5"
                 : ""
             } ${post.parentId ? "with-parent" : ""}`}
           >
@@ -54,8 +48,8 @@ const LikesPage = async () => {
             />
           </div>
         ))}
-      </section>
-    </section>
+      </div>
+    </div>
   );
 };
 
