@@ -25,7 +25,7 @@ async function Page({ params }: { params: { id: string } }) {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (
-    <section>
+    <div>
       <ProfileHeader
         accountId={userInfo.id}
         authUserId={user.id}
@@ -77,7 +77,7 @@ async function Page({ params }: { params: { id: string } }) {
           ))}
         </Tabs>
       </div>
-    </section>
+    </div>
   );
 }
 

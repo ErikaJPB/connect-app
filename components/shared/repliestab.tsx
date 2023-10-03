@@ -12,16 +12,16 @@ const RepliesTab = async ({ accountId }: Props) => {
 
   if (userReplies.length === 0) {
     return (
-      <section className="mt-9 flex flex-col gap-10">
+      <div className="mt-9 flex flex-col gap-10">
         <p className="text-center text-gray-700 !text-base-regular">
           No replies yet.
         </p>
-      </section>
+      </div>
     );
   }
 
   return (
-    <section className="mt-9 flex flex-col gap-10">
+    <div className="mt-9 flex flex-col gap-10">
       {userReplies.map((post: any) => (
         <PostCard
           key={post._id}
@@ -42,7 +42,7 @@ const RepliesTab = async ({ accountId }: Props) => {
           postId={post._id.toString()}
         />
       ))}
-    </section>
+    </div>
   );
 };
 

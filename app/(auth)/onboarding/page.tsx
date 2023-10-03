@@ -27,9 +27,9 @@ async function Page() {
         Please, complete your profile information to continue using Connect.
       </p>
 
-      <section className="mt-9 bg-gray-100 p-10">
+      <div className="mt-9 bg-gray-100 p-10">
         <AccountProfile user={userData} btnTittle="Continue" />
-      </section>
+      </div>
     </main>
   );
 }

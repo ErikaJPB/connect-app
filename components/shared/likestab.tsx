@@ -13,16 +13,16 @@ const LikesTab = async ({ accountId }: Props) => {
 
   if (userLikes.length === 0) {
     return (
-      <section className="mt-9 flex flex-col gap-10">
+      <div className="mt-9 flex flex-col gap-10">
         <p className="text-center text-gray-700 !text-base-regular">
           No likes yet.
         </p>
-      </section>
+      </div>
     );
   }
 
   return (
-    <section className="mt-9 flex flex-col gap-10">
+    <div className="mt-9 flex flex-col gap-10">
       {userLikes.map((post: any) => (
         <PostCard
           key={post._id}
@@ -43,7 +43,7 @@ const LikesTab = async ({ accountId }: Props) => {
           postId={post._id.toString()}
         />
       ))}
-    </section>
+    </div>
   );
 };
 

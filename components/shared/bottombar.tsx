@@ -17,7 +17,7 @@ function Bottombar() {
   const pathname = usePathname();
 
   return (
-    <section className="bottom-bar">
+    <div className="bottom-bar">
       <div className="bottom-bar-container">
         {sidebarLinks.map((link) => {
           const isActive =
@@ -35,7 +35,7 @@ function Bottombar() {
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }
 

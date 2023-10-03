@@ -19,7 +19,7 @@ const PostsTab = async ({ currentUserId, accountId, accountType }: Props) => {
   }
 
   return (
-    <section className="mt-9 flex flex-col gap-10">
+    <div className="mt-9 flex flex-col gap-10">
       {result.posts.map((post: any) => (
         <PostCard
           key={post._id}
@@ -49,7 +49,7 @@ const PostsTab = async ({ currentUserId, accountId, accountType }: Props) => {
           postId={post._id.toString()}
         />
       ))}
-    </section>
+    </div>
   );
 };
 

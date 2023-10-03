@@ -11,16 +11,16 @@ const RepostsTab = async ({ accountId }: Props) => {
 
   if (userReposts.length === 0) {
     return (
-      <section className="mt-9 flex flex-col gap-10">
+      <div className="mt-9 flex flex-col gap-10">
         <p className="text-center text-gray-700 !text-base-regular">
           No reposts yet.
         </p>
-      </section>
+      </div>
     );
   }
 
   return (
-    <section className="mt-9 flex flex-col gap-10">
+    <div className="mt-9 flex flex-col gap-10">
       {userReposts.map((post: any) => (
         <PostCard
           key={post._id}
@@ -42,7 +42,7 @@ const RepostsTab = async ({ accountId }: Props) => {
           isReposted={true}
         />
       ))}
-    </section>
+    </div>
   );
 };
 export default RepostsTab;

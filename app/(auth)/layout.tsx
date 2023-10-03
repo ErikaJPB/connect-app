@@ -21,9 +21,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={`${inter.className}`}>
-          <section className="w-full flex justify-center items-center min-h-screen">
+          <div className="w-full flex justify-center items-center min-h-screen">
             {children}
-          </section>
+          </div>
         </body>
       </html>
     </ClerkProvider>

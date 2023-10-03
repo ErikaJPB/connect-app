@@ -8,7 +8,7 @@ interface RightSidebarProps {
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ posts, users }) => {
   return (
-    <section className="custom-scrollbar right-sidebar">
+    <div className="custom-scrollbar right-sidebar">
       <div className="flex flex-1 flex-col justify-start">
         <h3 className="text-heading4-medium font-semibold text-center text-light-2 mb-4">
           Suggested Post
@@ -68,7 +68,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ posts, users }) => {
           </ul>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -14,10 +14,10 @@ const Page = async () => {
   const activity = await getActivity(userInfo._id);
 
   return (
-    <section>
+    <div>
       <h1 className="head-text mb-10">Activity</h1>
 
-      <section className="flex flex-col mt-10 gap-5">
+      <div className="flex flex-col mt-10 gap-5">
         {activity.length > 0 ? (
           <>
             {activity.map((activityItem) => (
@@ -51,8 +51,8 @@ const Page = async () => {
         ) : (
           <p>No activity yet!</p>
         )}
-      </section>
-    </section>
+      </div>
+    </div>
   );
 };
 

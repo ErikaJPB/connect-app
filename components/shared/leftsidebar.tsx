@@ -21,7 +21,7 @@ function LeftSidebar() {
   const pathname = usePathname();
 
   return (
-    <section className="leftside-bar">
+    <div className="leftside-bar">
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {sidebarLinks.map((link) => {
           const isActive =
@@ -53,7 +53,7 @@ function LeftSidebar() {
           </SignOutButton>
         </SignedIn>
       </div>
-    </section>
+    </div>
   );
 }
 

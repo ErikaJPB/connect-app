@@ -58,7 +58,7 @@ async function Home({
   return (
     <>
       <h1 className="head-text text-left">Home</h1>
-      <section className="flex flex-col mt-9 gap-10 ">
+      <div className="flex flex-col mt-9 gap-10 ">
         {result.posts.length === 0 ? (
           <p className="text-center">No posts found</p>
         ) : (
@@ -108,7 +108,7 @@ async function Home({
             ))}
           </>
         )}
-      </section>
+      </div>
       <Pagination
         path="/"
         pageNumber={searchParams?.page ? +searchParams.page : 1}

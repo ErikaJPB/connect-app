@@ -24,7 +24,7 @@ async function Page({
   });
 
   return (
-    <section>
+    <div>
       <h1 className="head-text mb-10">Search</h1>
 
       <SearchBar searchTerm="search" />
@@ -55,7 +55,7 @@ async function Page({
         pageNumber={searchParams?.page ? +searchParams.page : 1}
         isNext={result.isNext}
       />
-    </section>
+    </div>
   );
 }
 

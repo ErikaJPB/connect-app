@@ -35,9 +35,9 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
           <main>
-            <section>
+            <div>
               <LandingPage />
-            </section>
+            </div>
           </main>
         </body>
       </html>
