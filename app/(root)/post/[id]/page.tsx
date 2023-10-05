@@ -5,6 +5,7 @@ import PostCard from "@/components/cards/postcard";
 import Comment from "@/components/forms/comment";
 import { fetchPostById } from "@/lib/actions/post-actions";
 import { fetchUser } from "@/lib/actions/user-actions";
+import CommentCard from "@/components/cards/commentcard";
 
 export const revalidate = 0;
 
@@ -50,19 +51,22 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
       <div className="mt-10">
         {post.children.map((comment: any) => (
-          <PostCard
+          <CommentCard
             key={comment._id}
-            id={comment._id}
+            id={comment._id.toString()}
             currentUserId={comment?.id || ""}
             parentId={comment.parentId}
             content={comment.text}
             author={comment.author}
             createdAt={comment.createdAt}
-            comments={comment.children}
             isComment
             userId={userDb._id.toString()}
             isLiked={userLikes?.includes(comment._id.toString()) || false}
             postId={comment.id.toString()}
+            commentAuthor={comment.author._id.toString()}
+            isReposted={
+              userDb.reposts?.includes(comment._id.toString()) || false
+            }
           />
         ))}
       </div>

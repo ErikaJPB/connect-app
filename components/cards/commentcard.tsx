@@ -23,6 +23,7 @@ interface CommentProps {
   isReposted?: boolean;
   repostAuthorName?: string[];
   isComment?: boolean;
+  commentAuthor: string;
 }
 
 const CommentCard = ({
@@ -38,8 +39,9 @@ const CommentCard = ({
   postId,
   isReposted,
   repostAuthorName = [],
+  commentAuthor,
 }: CommentProps) => {
-  const isAuthorCurrentUser = author.id === currentUserId;
+  const isAuthorCurrentUser = commentAuthor === userId;
 
   return (
     <div className="flex flex-col w-full bg-white rounded-xl p-7">
@@ -75,7 +77,7 @@ const CommentCard = ({
                 <LikeButton
                   isLiked={isLiked || false}
                   userId={userId}
-                  postId={postId}
+                  postId={id}
                 />
 
                 {!isComment && (
@@ -94,11 +96,7 @@ const CommentCard = ({
                 />
 
                 {isAuthorCurrentUser && (
-                  <ActionButton
-                    postId={postId}
-                    userId={userId}
-                    content={content}
-                  />
+                  <ActionButton postId={id} userId={userId} content={content} />
                 )}
               </div>
 

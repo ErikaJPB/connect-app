@@ -89,7 +89,7 @@ async function Home({
                 {commentsByPost[post._id.toString()]?.map((comment) => (
                   <CommentCard
                     key={comment._id}
-                    id={comment._id}
+                    id={comment._id.toString()}
                     currentUserId={user?.id || ""}
                     parentId={comment.parentId}
                     content={comment.text}
@@ -104,6 +104,7 @@ async function Home({
                       userReposts?.includes(comment._id.toString()) || false
                     }
                     isComment={comment.isComment}
+                    commentAuthor={comment.author._id.toString()}
                   />
                 ))}
               </div>

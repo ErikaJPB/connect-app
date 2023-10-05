@@ -26,21 +26,18 @@ const RepliesTab = async ({ accountId }: Props) => {
       {userReplies.map((post: any) => (
         <CommentCard
           key={post._id}
-          id={post._id}
+          id={post._id.toString()}
           currentUserId={accountId}
           parentId={post.parentId}
           content={post.text}
-          author={{
-            name: post.author.name,
-            image: post.author.image,
-            id: post.author.id,
-            username: post.author.username,
-          }}
+          author={post.author}
           createdAt={post.createdAt}
           userId={post.author._id.toString()}
           isLiked={post.isLiked || false}
           postId={post._id.toString()}
           isComment={post.isComment}
+          commentAuthor={post.author._id.toString()}
+          isReposted={post.isReposted || false}
         />
       ))}
     </div>
