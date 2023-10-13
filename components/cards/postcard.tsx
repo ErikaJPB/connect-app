@@ -1,40 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillReplyAllFill } from "react-icons/bs";
+
+import { Post } from "@/types";
 import LikeButton from "../buttons/likebutton";
 import RepostButton from "../buttons/repostbutton";
 import ActionButton from "../buttons/actionbutton";
-
-interface Props {
-  id: string;
-  currentUserId: string;
-  parentId: string | null;
-  content: string;
-  author: {
-    username: string;
-    name: string;
-    image: string;
-    id: string;
-  };
-  createdAt: string;
-  comments: {
-    _id: string;
-    text: string;
-    parentId: string | null;
-    author: {
-      username: string;
-      name: string;
-      image: string;
-      id: string;
-    };
-  }[];
-  isComment?: boolean;
-  isLiked?: boolean;
-  userId: string;
-  postId: string;
-  isReposted?: boolean;
-  repostAuthorName?: string[];
-}
 
 const PostCard = ({
   id,
@@ -50,7 +21,7 @@ const PostCard = ({
   postId,
   isReposted,
   repostAuthorName = [],
-}: Props) => {
+}: Post) => {
   const isAuthorCurrentUser = author.id === currentUserId;
 
   return (

@@ -1,30 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillReplyAllFill } from "react-icons/bs";
+
+import { Comment } from "@/types";
 import LikeButton from "../buttons/likebutton";
 import RepostButton from "../buttons/repostbutton";
 import ActionButton from "../buttons/actionbutton";
-
-interface CommentProps {
-  id: string;
-  currentUserId: string;
-  parentId: string | null;
-  content: string;
-  author: {
-    username: string;
-    name: string;
-    image: string;
-    id: string;
-  };
-  createdAt: string;
-  isLiked?: boolean;
-  userId: string;
-  postId: string;
-  isReposted?: boolean;
-  repostAuthorName?: string[];
-  isComment?: boolean;
-  commentAuthor: string;
-}
 
 const CommentCard = ({
   id,
@@ -40,7 +21,7 @@ const CommentCard = ({
   isReposted,
   repostAuthorName = [],
   commentAuthor,
-}: CommentProps) => {
+}: Comment) => {
   const isAuthorCurrentUser = commentAuthor === userId;
 
   return (
