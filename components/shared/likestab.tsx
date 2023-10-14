@@ -11,7 +11,6 @@ interface Props {
 
 const LikesTab = async ({ accountId }: Props) => {
   const userLikes = await fetchUserLikes(accountId);
-  console.log(userLikes);
 
   if (userLikes.length === 0) {
     return (
@@ -29,7 +28,7 @@ const LikesTab = async ({ accountId }: Props) => {
         item.isComment ? (
           <CommentCard
             key={item._id}
-            id={item._id}
+            id={item._id.toString()}
             currentUserId={accountId}
             parentId={item.parentId}
             content={item.text}

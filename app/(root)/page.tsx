@@ -53,8 +53,6 @@ async function Home({
     commentsByPost[postId] = postComments;
   }
 
-  // console.log(commentsByPost);
-
   return (
     <>
       <h1 className="head-text text-left">Home</h1>

@@ -58,7 +58,7 @@ const CommentCard = ({
                 <LikeButton
                   isLiked={isLiked || false}
                   userId={userId}
-                  postId={id}
+                  postId={id.toString()}
                 />
 
                 {!isComment && (
@@ -77,7 +77,11 @@ const CommentCard = ({
                 />
 
                 {isAuthorCurrentUser && (
-                  <ActionButton postId={id} userId={userId} content={content} />
+                  <ActionButton
+                    postId={id.toString()}
+                    userId={userId}
+                    content={content}
+                  />
                 )}
               </div>
 
