@@ -2,7 +2,11 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs";
-import { fetchUser, getActivity } from "@/lib/actions/user-actions";
+import {
+  fetchUser,
+  getActivityLikes,
+  getActivityReplies,
+} from "@/lib/actions/user-actions";
 
 const Page = async () => {
   const user = await currentUser();
@@ -11,16 +15,17 @@ const Page = async () => {
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  const activity = await getActivity(userInfo._id);
+  const repliesActivity = await getActivityReplies(userInfo._id);
+  const likesActivity = await getActivityLikes(userInfo._id);
 
   return (
     <div>
       <h1 className="head-text mb-10">Activity</h1>
 
       <div className="flex flex-col mt-10 gap-5">
-        {activity.length > 0 ? (
+        {repliesActivity.length > 0 ? (
           <>
-            {activity.map((activityItem) => (
+            {repliesActivity.map((activityItem) => (
               <Link
                 key={activityItem._id}
                 href={`/post/${activityItem.parentId}`}
@@ -36,7 +41,7 @@ const Page = async () => {
                   </div>
                   <p className="!text-small-regular text-gray-600">
                     <span className="mr-1 text-primary">
-                      {activityItem.author.name}
+                      {activityItem.author.username}
                     </span>
                     {activityItem.isLike ? (
                       <>Liked your post</>
@@ -50,6 +55,33 @@ const Page = async () => {
           </>
         ) : (
           <p>No activity yet!</p>
+        )}
+      </div>
+
+      <div className="flex flex-col mt-5 gap-5">
+        {likesActivity.length > 0 ? (
+          likesActivity.map((activityLike) =>
+            activityLike.likedBy.map((user: any) => (
+              <Link key={user._id} href={`/post/${activityLike._id}`}>
+                <div className="flex items-center gap-2 rounded-md bg-secondary px-7 py-4">
+                  <div className="relative h-8 w-8 object-cover">
+                    <Image
+                      src={user.image}
+                      alt="Profile Image"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <p className="!text-small-regular text-gray-600">
+                    <span className="mr-1 text-primary">{user.username}</span>{" "}
+                    Liked your post
+                  </p>
+                </div>
+              </Link>
+            ))
+          )
+        ) : (
+          <p>No likes yet!</p>
         )}
       </div>
     </div>

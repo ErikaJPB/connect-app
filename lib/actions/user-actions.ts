@@ -139,7 +139,7 @@ export async function fetchUsers({
   }
 }
 
-export async function getActivity(userId: string) {
+export async function getActivityReplies(userId: string) {
   try {
     connectToDB();
 
@@ -155,10 +155,34 @@ export async function getActivity(userId: string) {
     }).populate({
       path: "author",
       model: User,
-      select: "name image _id",
+      select: "name image _id username",
     });
 
     return replies;
+  } catch (error: any) {
+    throw new Error(`Error fetching activity: ${error.message}`);
+  }
+}
+
+export async function getActivityLikes(userId: string) {
+  try {
+    connectToDB();
+
+    const userPosts = await Post.find({ author: userId });
+    const likedPostsIds = userPosts.reduce((acc, post) => {
+      return [...acc, ...post.likedBy];
+    }, []);
+
+    const likes = await Post.find({
+      id: { $in: likedPostsIds },
+      author: { $in: [userId] },
+    }).populate({
+      path: "likedBy",
+      model: User,
+      select: "name image _id username",
+    });
+
+    return likes;
   } catch (error: any) {
     throw new Error(`Error fetching activity: ${error.message}`);
   }
