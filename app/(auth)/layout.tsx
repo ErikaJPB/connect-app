@@ -19,11 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning={true}>
         <body className={`${inter.className}`}>
-          <div className="w-full flex justify-center items-center min-h-screen">
+          <section className="w-full flex justify-center items-center min-h-screen">
             {children}
-          </div>
+          </section>
         </body>
       </html>
     </ClerkProvider>

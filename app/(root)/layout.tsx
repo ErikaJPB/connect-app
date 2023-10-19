@@ -35,9 +35,9 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
           <main>
-            <div>
+            <section>
               <LandingPage />
-            </div>
+            </section>
           </main>
         </body>
       </html>
@@ -46,19 +46,26 @@ export default async function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning={true}>
         <body className={font.className}>
           <Topbar />
 
-          <main className="flex flex-row p-4  ">
-            <LeftSidebar />
-            <div className="main-container">
+          <main className="flex flex-row p-4">
+            <section>
+              <LeftSidebar />
+            </section>
+
+            <section className="main-container">
               <div className="w-full md:-ml-10 max-w-4xl">{children}</div>
-            </div>
-            <RightSidebar posts={posts} users={users} />
+            </section>
+            <section>
+              <RightSidebar posts={posts} users={users} />
+            </section>
           </main>
 
-          <Bottombar />
+          <section>
+            <Bottombar />
+          </section>
         </body>
       </html>
     </ClerkProvider>

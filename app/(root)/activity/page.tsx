@@ -7,6 +7,7 @@ import {
   getActivityLikes,
   getActivityReplies,
 } from "@/lib/actions/user-actions";
+import { User } from "@/types";
 
 const Page = async () => {
   const user = await currentUser();
@@ -16,6 +17,7 @@ const Page = async () => {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const repliesActivity = await getActivityReplies(userInfo._id);
+
   const likesActivity = await getActivityLikes(userInfo._id);
 
   return (
@@ -41,7 +43,7 @@ const Page = async () => {
                   </div>
                   <p className="!text-small-regular text-gray-600">
                     <span className="mr-1 text-primary">
-                      {activityItem.author.username}
+                      {activityItem.author.name}
                     </span>
                     {activityItem.isLike ? (
                       <>Liked your post</>
@@ -73,8 +75,8 @@ const Page = async () => {
                     />
                   </div>
                   <p className="!text-small-regular text-gray-600">
-                    <span className="mr-1 text-primary">{user.username}</span>{" "}
-                    Liked your post
+                    <span className="mr-1 text-primary">{user.name}</span> Liked
+                    your post
                   </p>
                 </div>
               </Link>
